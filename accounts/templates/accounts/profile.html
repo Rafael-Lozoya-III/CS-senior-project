@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile - Team Match</title>
+</head>
+
+<body>
+
+    <h1>Team Match</h1>
+
+    <h2>My Profile</h2>
+
+    <p>
+        <strong>Name:</strong>
+        {{ student_profile.user.get_full_name }}
+    </p>
+
+    <p>
+        <strong>Grade Level:</strong>
+        {{ student_profile.get_grade_level_display }}
+    </p>
+
+    <p>
+        <strong>Experience:</strong>
+        {{ student_profile.experience }}
+    </p>
+
+    <p>
+        <strong>Currently in a team:</strong>
+        {{ student_profile.in_team }}
+    </p>
+
+    <h3>Skills</h3>
+
+    <ul>
+        {% for skill in student_profile.skills.all %}
+            <li>{{ skill.name }}</li>
+        {% empty %}
+            <li>No skills added yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Interests</h3>
+
+    <ul>
+        {% for interest in student_profile.interests.all %}
+            <li>{{ interest.name }}</li>
+        {% empty %}
+            <li>No interests added yet.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
