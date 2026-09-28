@@ -18,6 +18,20 @@ class StudentProfile(models.Model):
     )
     experience = models.TextField(blank=True)
     in_team = models.BooleanField(default=False)
-
+    skills = models.ManyToManyField("Skill", blank=True)
+    interests = models.ManyToManyField("Interest", blank=True)
+    
     def __str__(self):
         return self.user.get_full_name() or self.user.username
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Interest(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
