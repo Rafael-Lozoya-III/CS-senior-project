@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Edit Profile - Team Match</title>
+</head>
+
+<body>
+
+    <h1>Team Match</h1>
+
+    <h2>Edit Profile</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <p>
+        <a href="{% url 'profile' %}">Cancel</a>
+    </p>
+
+</body>
+</html>

@@ -11,6 +11,10 @@
     <h2>My Profile</h2>
 
     <p>
+        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+    </p>
+
+    <p>
         <strong>Name:</strong>
         {{ student_profile.user.get_full_name }}
     </p>
