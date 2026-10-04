@@ -1,58 +1,146 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Profile - Team Match</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
 </head>
 
 <body>
 
-    <h1>Team Match</h1>
+    <nav class="navbar">
+        <div class="nav-container">
 
-    <h2>My Profile</h2>
+            <h1 class="logo">Team Match</h1>
 
-    <p>
-        <a href="{% url 'edit_profile' %}">Edit Profile</a>
-    </p>
+            <div class="nav-links">
+                <a href="#">Discover</a>
+                <a href="#">My Teams</a>
+                <a href="{% url 'profile' %}">Profile</a>
+            </div>
 
-    <p>
-        <strong>Name:</strong>
-        {{ student_profile.user.get_full_name }}
-    </p>
+        </div>
+    </nav>
 
-    <p>
-        <strong>Grade Level:</strong>
-        {{ student_profile.get_grade_level_display }}
-    </p>
 
-    <p>
-        <strong>Experience:</strong>
-        {{ student_profile.experience }}
-    </p>
+    <main class="page-container">
 
-    <p>
-        <strong>Currently in a team:</strong>
-        {{ student_profile.in_team }}
-    </p>
+        <h1 class="page-title">My Profile</h1>
 
-    <h3>Skills</h3>
+        <section class="profile-card">
 
-    <ul>
-        {% for skill in student_profile.skills.all %}
-            <li>{{ skill.name }}</li>
-        {% empty %}
-            <li>No skills added yet.</li>
-        {% endfor %}
-    </ul>
+            <div class="profile-header">
 
-    <h3>Interests</h3>
+                <div class="profile-person">
 
-    <ul>
-        {% for interest in student_profile.interests.all %}
-            <li>{{ interest.name }}</li>
-        {% empty %}
-            <li>No interests added yet.</li>
-        {% endfor %}
-    </ul>
+                    <div class="avatar">
+                        {{ student_profile.user.first_name|first }}
+                        {{ student_profile.user.last_name|first }}
+                    </div>
+
+                    <div>
+                        <h2 class="profile-name">
+                            {{ student_profile.user.get_full_name }}
+                        </h2>
+
+                        <p class="profile-grade">
+                            {{ student_profile.get_grade_level_display }}
+                        </p>
+                    </div>
+
+                </div>
+
+                <a class="edit-button" href="{% url 'edit_profile' %}">
+                    Edit Profile
+                </a>
+
+            </div>
+
+
+            <div class="profile-section">
+
+                <h3>Experience</h3>
+
+                {% if student_profile.experience %}
+                    <p>{{ student_profile.experience }}</p>
+                {% else %}
+                    <p>No experience added yet.</p>
+                {% endif %}
+
+            </div>
+
+
+            <div class="profile-section">
+
+                <h3>Skills</h3>
+
+                <div class="tags">
+
+                    {% for skill in student_profile.skills.all %}
+
+                        <span class="tag">
+                            {{ skill.name }}
+                        </span>
+
+                    {% empty %}
+
+                        <span>No skills added yet.</span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-section">
+
+                <h3>Interests</h3>
+
+                <div class="tags">
+
+                    {% for interest in student_profile.interests.all %}
+
+                        <span class="tag">
+                            {{ interest.name }}
+                        </span>
+
+                    {% empty %}
+
+                        <span>No interests added yet.</span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-section">
+
+                <h3>Team Status</h3>
+
+                <div class="team-status">
+
+                    {% if student_profile.in_team %}
+                        Currently in a team
+                    {% else %}
+                        Looking for a team
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
