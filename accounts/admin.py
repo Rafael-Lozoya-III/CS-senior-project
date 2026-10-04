@@ -1,10 +1,16 @@
 from django.contrib import admin
-from .models import StudentProfile, Skill, Interest
+from .models import Skill, Interest, StudentProfile, StudentSkill, TeacherProfile
+
+
+class StudentSkillInline(admin.TabularInline):
+    model = StudentSkill
+    extra = 1
 
 
 @admin.register(StudentProfile)
 class StudentProfileAdmin(admin.ModelAdmin):
-    list_display = ("get_name", "grade_level", "in_team")
+    list_display = ("get_name", "grade_level")
+    inlines = [StudentSkillInline]
 
     def get_name(self, obj):
         return obj.user.get_full_name() or obj.user.username
@@ -12,13 +18,6 @@ class StudentProfileAdmin(admin.ModelAdmin):
     get_name.short_description = "Student"
 
 
-@admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name",)
-
-
-@admin.register(Interest)
-class InterestAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name",)
+admin.site.register(Skill)
+admin.site.register(Interest)
+admin.site.register(TeacherProfile)
