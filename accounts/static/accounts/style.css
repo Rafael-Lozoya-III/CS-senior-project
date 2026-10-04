@@ -162,3 +162,15 @@ body {
     border-radius: 6px;
     padding: 9px 12px;
 }
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.skill-level {
+    color: #667085;
+    font-size: 12px;
+    font-weight: normal;
+}

@@ -82,13 +82,16 @@
 
                 <div class="tags">
 
-                    {% for skill in student_profile.skills.all %}
+                    {% for student_skill in student_profile.studentskill_set.all %}
 
-                        <span class="tag">
-                            {{ skill.name }}
+                        <span class="tag skill-tag">
+                            <strong>{{ student_skill.skill.name }}</strong>
+                            <span class="skill-level">
+                                {{ student_skill.get_level_display }}
+                            </span>
                         </span>
 
-                    {% empty %}
+                     {% empty %}
 
                         <span>No skills added yet.</span>
 
@@ -116,23 +119,6 @@
                         <span>No interests added yet.</span>
 
                     {% endfor %}
-
-                </div>
-
-            </div>
-
-
-            <div class="profile-section">
-
-                <h3>Team Status</h3>
-
-                <div class="team-status">
-
-                    {% if student_profile.in_team %}
-                        Currently in a team
-                    {% else %}
-                        Looking for a team
-                    {% endif %}
 
                 </div>
 
