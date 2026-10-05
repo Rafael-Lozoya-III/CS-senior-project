@@ -24,9 +24,19 @@
             </a>
 
             <div class="nav-links">
-                <a href="#">Discover</a>
-                <a href="#">My Teams</a>
-                <a href="{% url 'profile' %}">Profile</a>
+                <a href="{% url 'discover' %}"
+                    class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
+                     Discover
+                </a>
+
+                <a href="#">
+                    My Teams
+                </a>
+
+                <a href="{% url 'profile' %}"
+                   class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                    Profile
+                </a>
             </div>
 
         </div>

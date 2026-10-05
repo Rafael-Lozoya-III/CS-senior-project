@@ -41,3 +41,38 @@ def edit_profile(request):
         "accounts/edit_profile.html",
         {"form": form},
     )
+
+@login_required
+def discover(request):
+    projects = [
+        {
+            "title": "AI Study Assistant",
+            "course": "CSCI 4390",
+            "description": "Build an AI-powered study assistant for college students.",
+            "skills": ["Python", "AI", "Django"],
+            "members": 3,
+            "max_members": 4,
+        },
+        {
+            "title": "Campus Marketplace",
+            "course": "CSCI 4390",
+            "description": "Create a marketplace where students can buy and sell items on campus.",
+            "skills": ["Django", "HTML", "CSS"],
+            "members": 2,
+            "max_members": 4,
+        },
+        {
+            "title": "Fitness Tracker",
+            "course": "CSCI 4390",
+            "description": "Develop an application for tracking workouts and fitness goals.",
+            "skills": ["Java", "UI Design"],
+            "members": 2,
+            "max_members": 5,
+        },
+    ]
+
+    return render(
+        request,
+        "accounts/discover.html",
+        {"projects": projects},
+    )

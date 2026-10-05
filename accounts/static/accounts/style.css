@@ -42,6 +42,12 @@ body {
     font-weight: 600;
 }
 
+.nav-links a.active {
+    font-weight: 700;
+    border-bottom: 2px solid #222;
+    padding-bottom: 4px;
+}
+
 .nav-links a:hover {
     text-decoration: underline;
 }
@@ -294,4 +300,126 @@ body {
     color: #b42318;
     font-size: 14px;
     margin: 0;
+}
+
+/* Discover */
+
+.discover-header {
+    margin-bottom: 24px;
+}
+
+.discover-tools {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 14px;
+
+    border: 1px solid #cfd4dc;
+    border-radius: 7px;
+
+    font: inherit;
+    background: white;
+}
+
+.search-input:focus {
+    outline: 2px solid #aab7c8;
+    outline-offset: 1px;
+}
+
+.filter-button {
+    padding: 10px 18px;
+
+    border: 1px solid #cfd4dc;
+    border-radius: 7px;
+
+    background: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background: #f5f5f5;
+}
+
+.section-title {
+    margin: 0 0 18px;
+    font-size: 21px;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.project-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.project-card h2 {
+    margin: 0 0 5px;
+    font-size: 20px;
+}
+
+.project-course {
+    margin: 0;
+    color: #667085;
+    font-size: 14px;
+}
+
+.member-count {
+    background: #eef2f7;
+    border-radius: 20px;
+    padding: 7px 11px;
+
+    color: #475467;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.project-description {
+    margin: 18px 0;
+    line-height: 1.6;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.project-link {
+    color: #222;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+.no-results {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    padding: 28px;
+    text-align: center;
+
+    color: #667085;
 }

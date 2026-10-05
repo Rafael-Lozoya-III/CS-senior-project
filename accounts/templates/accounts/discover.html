@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Discover - Team Match{% endblock %}
+
+{% block content %}
+
+<div class="discover-header">
+    <h1 class="page-title">Discover Projects</h1>
+
+    <p class="page-subtitle">
+        Find projects and teams that match your skills and interests.
+    </p>
+</div>
+
+<div class="discover-tools">
+
+    <input
+        id="project-search"
+        class="search-input"
+        type="search"
+        placeholder="Search projects..."
+        autocompleted="off"
+    >
+
+    <button class="filter-button" type="button">
+        Filter
+    </button>
+
+</div>
+
+
+<h2 class="section-title">Recommended for You</h2>
+
+
+<div class="project-list">
+
+    {% for project in projects %}
+
+        <article class="project-card searchable-project">
+
+            <div class="project-card-header">
+
+                <div>
+                    <h2>{{ project.title }}</h2>
+                    <p class="project-course">{{ project.course }}</p>
+                </div>
+
+                <span class="member-count">
+                    {{ project.members }} / {{ project.max_members }} members
+                </span>
+
+            </div>
+
+
+            <p class="project-description">
+                {{ project.description }}
+            </p>
+
+
+            <div class="tags">
+
+                {% for skill in project.skills %}
+                    <span class="tag">{{ skill }}</span>
+                {% endfor %}
+
+            </div>
+
+
+            <div class="project-footer">
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
+        </article>
+
+    {% endfor %}
+
+</div>
+
+<p id="no-project-results" class="no-results" hidden>
+    No projects match your search
+</p>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'accounts/discover.js' %}"></script>
+{% endblock %}
