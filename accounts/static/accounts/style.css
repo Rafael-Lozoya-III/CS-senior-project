@@ -423,3 +423,110 @@ body {
 
     color: #667085;
 }
+
+/* Project Details */
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #475467;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
+.project-detail-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.project-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.project-detail-title {
+    margin: 5px 0 0;
+    font-size: 28px;
+}
+
+.project-detail-section {
+    padding: 24px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.project-detail-section h2 {
+    margin: 0 0 14px;
+    font-size: 19px;
+}
+
+.project-detail-section p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+}
+
+.member-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #eef2f7;
+    border: 1px solid #d0d5dd;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    color: #475467;
+}
+
+.member-avatar.open-spot {
+    background: white;
+    border-style: dashed;
+    font-size: 22px;
+}
+
+.project-detail-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+}
+
+.apply-button {
+    padding: 11px 22px;
+    border: 1px solid #222;
+    border-radius: 7px;
+    background: #222;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.apply-button:hover {
+    background: #444;
+}

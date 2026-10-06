@@ -7,4 +7,9 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path("profile/edit/", views.edit_profile, name="edit_profile"),
     path("discover/", views.discover, name="discover"),
+    path(
+    "projects/<int:project_id>/",
+    views.project_detail,
+    name="project_detail",
+),
 ]

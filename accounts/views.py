@@ -46,6 +46,7 @@ def edit_profile(request):
 def discover(request):
     projects = [
         {
+            "id": 1,
             "title": "AI Study Assistant",
             "course": "CSCI 4390",
             "description": "Build an AI-powered study assistant for college students.",
@@ -54,6 +55,7 @@ def discover(request):
             "max_members": 4,
         },
         {
+            "id": 2,
             "title": "Campus Marketplace",
             "course": "CSCI 4390",
             "description": "Create a marketplace where students can buy and sell items on campus.",
@@ -62,6 +64,7 @@ def discover(request):
             "max_members": 4,
         },
         {
+            "id": 3,
             "title": "Fitness Tracker",
             "course": "CSCI 4390",
             "description": "Develop an application for tracking workouts and fitness goals.",
@@ -75,4 +78,47 @@ def discover(request):
         request,
         "accounts/discover.html",
         {"projects": projects},
+    )
+
+@login_required
+def project_detail(request, project_id):
+    projects = [
+        {
+            "id": 1,
+            "title": "AI Study Assistant",
+            "course": "CSCI 4390",
+            "description": "Build an AI-powered study assistant for college students.",
+            "skills": ["Python", "AI", "Django"],
+            "members": ["Alex R.", "Maria S.", "Jordan G."],
+            "max_members": 4,
+        },
+        {
+            "id": 2,
+            "title": "Campus Marketplace",
+            "course": "CSCI 4390",
+            "description": "Create a marketplace where students can buy and sell items on campus.",
+            "skills": ["Django", "HTML", "CSS"],
+            "members": ["Chris M.", "Taylor B."],
+            "max_members": 4,
+        },
+        {
+            "id": 3,
+            "title": "Fitness Tracker",
+            "course": "CSCI 4390",
+            "description": "Develop an application for tracking workouts and fitness goals.",
+            "skills": ["Java", "UI Design"],
+            "members": ["Sam P.", "Jamie L."],
+            "max_members": 5,
+        },
+    ]
+
+    project = next(
+        (project for project in projects if project["id"] == project_id),
+        None,
+    )
+
+    return render(
+        request,
+        "accounts/project_detail.html",
+        {"project": project},
     )
