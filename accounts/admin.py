@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import Skill, Interest, StudentProfile, StudentSkill, TeacherProfile
 
+
 class StudentSkillInline(admin.TabularInline):
     model = StudentSkill
     extra = 1
+
 
 @admin.register(StudentProfile)
 class StudentProfileAdmin(admin.ModelAdmin):
@@ -14,6 +16,7 @@ class StudentProfileAdmin(admin.ModelAdmin):
         return obj.user.get_full_name() or obj.user.username
 
     get_name.short_description = "Student"
+
 
 admin.site.register(Skill)
 admin.site.register(Interest)

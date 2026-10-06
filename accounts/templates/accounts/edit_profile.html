@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile - Team Match{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">Edit Profile</h1>
+
+<p class="page-subtitle">
+    Update your student profile information.
+</p>
+
+<section class="form-card">
+
+    <form method="post" class="profile-form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">
+                First Name
+            </label>
+
+            {{ form.first_name }}
+
+            {% for error in form.first_name.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.last_name.id_for_label }}">
+                Last Name
+            </label>
+
+            {{ form.last_name }}
+
+            {% for error in form.last_name.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.grade_level.id_for_label }}">
+                Grade Level
+            </label>
+
+            {{ form.grade_level }}
+
+            {% for error in form.grade_level.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.experience.id_for_label }}">
+                Experience
+            </label>
+
+            {{ form.experience }}
+
+            {% for error in form.experience.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-actions">
+
+            <a href="{% url 'profile' %}" class="cancel-button">
+                Cancel
+            </a>
+
+            <button type="submit" class="save-button">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
