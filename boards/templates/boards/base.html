@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Discussion Board{% endblock %}</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 900px;
+               margin: 2rem auto; padding: 0 1rem; color: #222; }
+        nav { border-bottom: 2px solid #eee; padding-bottom: 1rem;
+              margin-bottom: 2rem; display: flex; justify-content: space-between; }
+        nav a { margin-right: 1rem; text-decoration: none; color: #0366d6; }
+        .card { border: 1px solid #e1e4e8; border-radius: 8px;
+                padding: 1rem; margin-bottom: 1rem; }
+        .card h3 { margin-top: 0; }
+        .meta { color: #666; font-size: 0.85rem; }
+        .thread-row { display: flex; justify-content: space-between;
+                      padding: 0.75rem 0; border-bottom: 1px solid #eee; }
+        .btn { background: #0366d6; color: white; padding: 0.5rem 1rem;
+               border-radius: 6px; text-decoration: none; border: none;
+               cursor: pointer; display: inline-block; }
+        .btn-secondary { background: #6c757d; }
+        .post { border-left: 3px solid #0366d6; padding-left: 1rem;
+                margin: 1rem 0; }
+        .reply { margin-left: 2rem; border-left: 3px solid #ccc; }
+        .form-control { width: 100%; padding: 0.5rem; border: 1px solid #ccc;
+                        border-radius: 6px; font-family: inherit;
+                        box-sizing: border-box; }
+        .messages { list-style: none; padding: 0; }
+        .messages li { padding: 0.5rem; background: #fff3cd;
+                       border-radius: 6px; margin-bottom: 0.5rem; }
+        .badge { background: #e1e4e8; border-radius: 12px;
+                 padding: 2px 8px; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+<nav>
+    <div><a href="{% url 'board_list' %}"><strong>Discussion Boards</strong></a></div>
+    <div>
+        {% if user.is_authenticated %}
+            {{ user.username }} |
+            <form method="post" action="{% url 'logout' %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% if messages %}
+<ul class="messages">
+    {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+</ul>
+{% endif %}
+
+{% block content %}{% endblock %}
+</body>
+</html>

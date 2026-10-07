@@ -1,0 +1,22 @@
+{% extends "boards/base.html" %}
+{% block content %}
+<p class="meta"><a href="{{ class_group.get_absolute_url }}">
+    {{ class_group.name }}</a> / Team</p>
+<h1>{{ team.name }}</h1>
+
+<a class="btn" href="{% url 'new_team_thread' class_group.slug team.slug %}">
+    + New Thread</a>
+
+<h2>Team Discussions</h2>
+{% for thread in threads %}
+    <div class="thread-row">
+        <div>
+            <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+            <div class="meta">by {{ thread.author.username }}</div>
+        </div>
+        <div class="meta">{{ thread.num_posts }} replies</div>
+    </div>
+{% empty %}
+    <p>No team threads yet.</p>
+{% endfor %}
+{% endblock %}

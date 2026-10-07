@@ -1,0 +1,12 @@
+{% extends "boards/base.html" %}
+{% block content %}
+<h1>New Thread
+    {% if team %}in {{ team.name }}{% else %}in {{ class_group.name }}{% endif %}
+</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>{{ form.title.label_tag }}<br>{{ form.title }}</p>
+    <p>{{ form.body.label_tag }}<br>{{ form.body }}</p>
+    <button class="btn" type="submit">Create Thread</button>
+</form>
+{% endblock %}

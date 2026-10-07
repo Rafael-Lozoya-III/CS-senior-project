@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "accounts",
     "matching",
     "notifications",
+    "boards",
 ]
 
 MIDDLEWARE = [

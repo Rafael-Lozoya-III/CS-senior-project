@@ -1,0 +1,25 @@
+{% extends "boards/base.html" %}
+{% block content %}
+<h1>My Boards</h1>
+
+<h2>Classes</h2>
+{% for c in my_classes %}
+    <div class="card">
+        <h3><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></h3>
+        <p>{{ c.description }}</p>
+        <p class="meta">Teacher: {{ c.teacher.username }}</p>
+    </div>
+{% empty %}
+    <p>You aren't enrolled in any classes yet.</p>
+{% endfor %}
+
+<h2>Teams</h2>
+{% for t in my_teams %}
+    <div class="card">
+        <h3><a href="{{ t.get_absolute_url }}">{{ t.name }}</a></h3>
+        <p class="meta">in {{ t.class_group.name }}</p>
+    </div>
+{% empty %}
+    <p>You aren't on any teams yet.</p>
+{% endfor %}
+{% endblock %}
