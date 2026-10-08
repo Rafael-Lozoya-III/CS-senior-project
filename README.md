@@ -2,7 +2,7 @@
 Need to create a team for a project but don't know how? Group-Match can help! Its a simpler way to find available teammates with the skills needed to complete the project! 
 
 ## Team Members
-Rafael Lozoya || Alfredo Zavala || Jordan Saenz
+Rafael Lozoya || Alfredo Zavala || Jordan Gutierrez
 
 ## First-time setup
 

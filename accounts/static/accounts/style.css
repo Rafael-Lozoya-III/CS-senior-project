@@ -530,3 +530,91 @@ body {
 .apply-button:hover {
     background: #444;
 }
+
+/* Login page */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.login-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 36px;
+    width: 100%;
+    max-width: 440px;
+}
+
+.login-card h1 {
+    margin-bottom: 8px;
+}
+
+.login-card > p {
+    color: #667085;
+    margin-bottom: 24px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 6px;
+    box-sizing: border-box;
+}
+
+.login-error {
+    color: #b42318 !important;
+    background: #fef3f2;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.signup-text {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+}
+
+.logged-out-nav {
+    justify-content: center;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #222;
+    border: 1px solid #222;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: #222;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
