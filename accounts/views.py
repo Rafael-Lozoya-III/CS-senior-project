@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.db import transaction
+from django.http import Http404
 
 from .forms import StudentProfileForm, StudentSignUpForm
 from .models import StudentProfile
@@ -39,6 +40,9 @@ TEMP_PROJECTS = [
 
 @login_required
 def profile(request):
+    if not StudentProfile.objects.filter(user=request.user).exists():
+        raise PermissionDenied
+
     student_profile = StudentProfile.objects.get(user=request.user)
 
     return render(
@@ -49,6 +53,9 @@ def profile(request):
 
 @login_required
 def edit_profile(request):
+    if not StudentProfile.objects.filter(user=request.user).exists():
+        raise PermissionDenied
+
     student_profile = StudentProfile.objects.get(user=request.user)
 
     if request.method == "POST":

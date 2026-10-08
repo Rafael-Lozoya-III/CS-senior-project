@@ -26,16 +26,18 @@
 
                 <div class="nav-links">
                     <a href="{% url 'discover' %}"
-                       class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
+                    class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
                         Discover
                     </a>
 
-                    <a href="#">My Teams</a>
+                    {% if not request.user.teacherprofile %}
+                        <a href="#">My Teams</a>
 
-                    <a href="{% url 'profile' %}"
-                       class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
-                        Profile
-                    </a>
+                        <a href="{% url 'profile' %}"
+                           class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                            Profile
+                        </a>
+                    {% endif %}
 
                     <form method="post" action="{% url 'logout' %}" class="logout-form">
                         {% csrf_token %}
@@ -43,8 +45,8 @@
                             Logout
                         </button>
                     </form>
-                    
                 </div>
+
             {% else %}
                 <a href="{% url 'login' %}" class="logo-link">
                     Team Match

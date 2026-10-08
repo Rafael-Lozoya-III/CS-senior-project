@@ -1,10 +1,14 @@
 from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import RedirectView
 from django.urls import path
 
 from . import views
 
 
 urlpatterns = [
+    path(
+        "",
+        RedirectView.as_view(pattern_name="discover", permanent=False)),
     path(
         "accounts/login/", 
         LoginView.as_view(
