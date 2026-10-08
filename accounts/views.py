@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
+from django.contrib.auth import login
+from django.db import transaction
 
-from .forms import StudentProfileForm
+from .forms import StudentProfileForm, StudentSignUpForm
 from .models import StudentProfile
 
 TEMP_PROJECTS = [
@@ -95,3 +97,21 @@ def project_detail(request, project_id):
         "accounts/project_detail.html",
         {"project": project},
     )
+
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect("discover")
+
+    if request.method == "POST":
+        form = StudentSignUpForm(request.POST)
+
+        if form.is_valid():
+            with transaction.atomic():
+                user = form.save()
+
+            login(request, user)
+            return redirect("discover")
+    else:
+        form = StudentSignUpForm()
+
+    return render(request, "accounts/signup.html", {"form": form})

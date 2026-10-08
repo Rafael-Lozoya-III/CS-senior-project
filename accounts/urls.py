@@ -20,6 +20,7 @@ urlpatterns = [
     ),
     path("profile/", views.profile, name="profile"),
     path("profile/edit/", views.edit_profile, name="edit_profile"),
+    path("accounts/signup/", views.signup, name="signup"),
     path("discover/", views.discover, name="discover"),
     path(
         "projects/<int:project_id>/",

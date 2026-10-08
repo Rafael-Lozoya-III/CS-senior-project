@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Create Account - Team Match{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <h1>Create Account</h1>
+        <p>Sign up using your UTRGV school email.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="login-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% for error in field.errors %}
+                        <p class="login-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="save-button">
+                Create Account
+            </button>
+        </form>
+
+        <p class="signup-text">
+            Already have an account?
+            <a href="{% url 'login' %}">Sign In</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
