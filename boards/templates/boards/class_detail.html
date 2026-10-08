@@ -1,0 +1,34 @@
+{% extends "boards/base.html" %}
+{% block content %}
+<h1>{{ class_group.name }}</h1>
+<p>{{ class_group.description }}</p>
+<p class="meta">Teacher: {{ class_group.teacher.username }}</p>
+
+<a class="btn" href="{% url 'new_class_thread' class_group.slug %}">+ New Thread</a>
+
+{% if teams %}
+    <h2>Teams</h2>
+    {% for team in teams %}
+        <div class="card">
+            <a href="{{ team.get_absolute_url }}">{{ team.name }}</a>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h2>Discussions</h2>
+{% for thread in threads %}
+    <div class="thread-row">
+        <div>
+            {% if thread.is_pinned %}📌{% endif %}
+            <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+            {% if thread.is_locked %}🔒{% endif %}
+            <div class="meta">by {{ thread.author.username }}</div>
+        </div>
+        <div class="meta">
+            {{ thread.num_posts }} replies
+        </div>
+    </div>
+{% empty %}
+    <p>No threads yet. Start the first discussion!</p>
+{% endfor %}
+{% endblock %}

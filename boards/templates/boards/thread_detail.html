@@ -1,0 +1,55 @@
+{% extends "boards/base.html" %}
+{% block content %}
+<h1>{{ thread.title }}</h1>
+<p class="meta">
+    by {{ thread.author.username }} · {{ thread.created_at }}
+    {% if thread.class_group %}· in {{ thread.class_group.name }}{% endif %}
+</p>
+
+<div class="post">
+    {{ thread.body|linebreaks }}
+</div>
+
+{% if thread.is_locked %}
+    <p><em>🔒 This thread is locked.</em></p>
+{% endif %}
+
+<h2>{{ posts.count }} Repl{{ posts.count|pluralize:"y,ies" }}</h2>
+
+{% for post in posts %}
+    <div class="post">
+        <p class="meta">{{ post.author.username }} · {{ post.created_at }}</p>
+        {{ post.body|linebreaks }}
+
+        {% for reply in post.replies.all %}
+            <div class="post reply">
+                <p class="meta">{{ reply.author.username }} · {{ reply.created_at }}</p>
+                {{ reply.body|linebreaks }}
+            </div>
+        {% endfor %}
+
+        <details>
+            <summary class="meta">Reply</summary>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="parent_id" value="{{ post.id }}">
+                <textarea name="body" class="form-control" rows="3" required></textarea>
+                <button class="btn" type="submit" style="margin-top:0.5rem">Post Reply</button>
+            </form>
+        </details>
+
+        {% if post.author == user %}
+            <a class="meta" href="{% url 'delete_post' post.pk %}">delete</a>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% if not thread.is_locked %}
+    <h3>Add a Reply</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.body }}
+        <button class="btn" type="submit" style="margin-top:0.5rem">Post</button>
+    </form>
+{% endif %}
+{% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-sgn$@oq6-no1w1kh%qvqybb2d!2-ey+=zye^xv$!p4y^+q6dek
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".app.github.dev"]
 
 
 # Application definition
@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "accounts",
+    "matching",
+    "notifications",
+    "boards",
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,11 @@ MAILERS = {
 
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "discover"
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.app.github.dev",
+    "https://localhost:8000",
+    "http://localhost:8000",
+    "https://127.0.0.1:8000",
+    "http://127.0.0.1:8000",
+]
