@@ -1,5 +1,4 @@
-/* Team Match CSS — imports are intentionally ordered to preserve existing styles. */
-
+/* Team Match CSS - imports are ordered to preserve existing styles. */
 @import url("css/01-base.css");
 @import url("css/02-profile.css");
 @import url("css/03-discover.css");
