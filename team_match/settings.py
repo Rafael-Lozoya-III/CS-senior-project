@@ -131,7 +131,7 @@ MAILERS = {
 }
 
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "discover"
+LOGIN_REDIRECT_URL = "home"
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.app.github.dev",

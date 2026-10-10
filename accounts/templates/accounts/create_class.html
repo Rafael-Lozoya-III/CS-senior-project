@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+
+{% block title %}Create Class - Team Match{% endblock %}
+
+{% block content %}
+<a href="{% url 'professor_classes' %}" class="back-link">
+    ← Back to My Classes
+</a>
+
+<h1 class="page-title">Create Class</h1>
+<p class="page-subtitle">
+    Add a class for your students and teams.
+</p>
+
+<div class="form-card">
+    <form method="post" class="profile-form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+
+                {{ field }}
+
+                {% for error in field.errors %}
+                    <p class="field-error">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            <a href="{% url 'professor_classes' %}"
+               class="cancel-button">
+                Cancel
+            </a>
+
+            <button type="submit" class="save-button">
+                Create Class
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

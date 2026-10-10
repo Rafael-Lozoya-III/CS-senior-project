@@ -4,104 +4,94 @@
 
 {% block content %}
 
-<h1 class="page-title">My Profile</h1>
+<div class="student-profile-page">
 
-<section class="profile-card">
+    <div class="student-profile-title">
+        <span class="profile-eyebrow">STUDENT PROFILE</span>
+        <h1 class="page-title">My Profile</h1>
+        <p class="page-subtitle">
+            Your skills, interests, and experience.
+        </p>
+    </div>
 
-    <div class="profile-header">
+    <section class="profile-card student-profile-card">
 
-        <div class="profile-person">
+        <div class="profile-header">
+            <div class="profile-person">
 
-            <div class="avatar">
-                {{ student_profile.user.first_name|first }}
-                {{ student_profile.user.last_name|first }}
+                <div class="avatar">
+                    {{ student_profile.user.first_name|first }}
+                    {{ student_profile.user.last_name|first }}
+                </div>
+
+                <div>
+                    <h2 class="profile-name">
+                        {{ student_profile.user.get_full_name }}
+                    </h2>
+
+                    <p class="profile-grade">
+                        {{ student_profile.get_grade_level_display }}
+                        · UTRGV Student
+                    </p>
+                </div>
+
             </div>
 
-            <div>
-                <h2 class="profile-name">
-                    {{ student_profile.user.get_full_name }}
-                </h2>
+            <a class="edit-button" href="{% url 'edit_profile' %}">
+                Edit Profile
+            </a>
+        </div>
 
-                <p class="profile-grade">
-                    {{ student_profile.get_grade_level_display }}
+        <div class="profile-section">
+            <h3>About Me</h3>
+
+            {% if student_profile.experience %}
+                <p>{{ student_profile.experience }}</p>
+            {% else %}
+                <p class="profile-placeholder">
+                    No experience added yet.
+                    Use Edit Profile to tell others about yourself.
                 </p>
-            </div>
-
+            {% endif %}
         </div>
 
-        <a class="edit-button" href="{% url 'edit_profile' %}">
-            Edit Profile
-        </a>
+        <div class="profile-section">
+            <h3>Interests</h3>
 
-    </div>
-
-
-    <div class="profile-section">
-
-        <h3>Experience</h3>
-
-        {% if student_profile.experience %}
-            <p>{{ student_profile.experience }}</p>
-        {% else %}
-            <p>No experience added yet.</p>
-        {% endif %}
-
-    </div>
-
-
-    <div class="profile-section">
-
-        <h3>Interests</h3>
-
-        <div class="tags">
-
-            {% for interest in student_profile.interests.all %}
-
-                <span class="tag">
-                    {{ interest.name }}
-                </span>
-
-            {% empty %}
-
-                <span>No interests added yet.</span>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-
-    <div class="profile-section">
-
-        <h3>Skills</h3>
-
-        <div class="tags">
-
-            {% for student_skill in student_profile.studentskill_set.all %}
-
-                <span class="tag skill-tag">
-
-                    <strong>
-                        {{ student_skill.skill.name }}
-                    </strong>
-
-                    <span class="skill-level">
-                        {{ student_skill.get_level_display }}
+            <div class="tags">
+                {% for interest in student_profile.interests.all %}
+                    <span class="tag">
+                        {{ interest.name }}
                     </span>
-
-                </span>
-
-            {% empty %}
-
-                <span>No skills added yet.</span>
-
-            {% endfor %}
-
+                {% empty %}
+                    <p class="profile-placeholder">
+                        No interests added yet.
+                    </p>
+                {% endfor %}
+            </div>
         </div>
 
-    </div>
+        <div class="profile-section">
+            <h3>Skills</h3>
 
-</section>
+            <div class="tags">
+                {% for student_skill in student_profile.studentskill_set.all %}
+                    <span class="tag skill-tag">
+                        <strong>{{ student_skill.skill.name }}</strong>
+
+                        <span class="skill-level">
+                            {{ student_skill.get_level_display }}
+                        </span>
+                    </span>
+                {% empty %}
+                    <p class="profile-placeholder">
+                        No skills added yet.
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+</div>
 
 {% endblock %}

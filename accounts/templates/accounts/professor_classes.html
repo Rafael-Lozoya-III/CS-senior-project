@@ -1,0 +1,37 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="professor-dashboard">
+
+    <div class="professor-header">
+    <div>
+        <h1>My Classes</h1>
+        <p>Manage your classes and student teams.</p>
+    </div>
+
+    <a href="{% url 'create_class' %}" class="create-class-button">
+        + Create Class
+    </a>
+</div>
+
+    <div class="professor-classes">
+        {% for class in classes %}
+            <a href="{{ class.get_absolute_url }}" class="professor-class-card">
+                <div>
+                    <h2>{{ class.name }}</h2>
+                    <p>{{ class.description|default:"View class details and discussions" }}</p>
+                    <span>{{ class.members.count }} students enrolled</span>
+                </div>
+                <span class="class-arrow">→</span>
+            </a>
+        {% empty %}
+            <div class="professor-empty">
+                <h2>No classes yet</h2>
+                <p>You don't have any classes assigned to your account.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

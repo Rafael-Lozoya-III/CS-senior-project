@@ -59,7 +59,7 @@
 
         <div class="form-group">
             <label for="{{ form.experience.id_for_label }}">
-                Experience
+                About Me
             </label>
 
             {{ form.experience }}
@@ -68,6 +68,79 @@
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
         </div>
+
+        <div class="form-group">
+            <h3>Interests</h3>
+            <p class="form-help">
+                Choose the topics you're interested in.
+            </p>
+
+            <div class="interest-options">
+                {% for checkbox in form.interests %}
+                    <label class="interest-option">
+                        {{ checkbox.tag }}
+                        <span>{{ checkbox.choice_label }}</span>
+                    </label>
+                {% empty %}
+                    <p>No interests available yet.</p>
+                {% endfor %}
+            </div>
+
+            {% for error in form.interests.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+<div class="form-group">
+    <h3>Skills</h3>
+
+    <p class="form-help">
+        Add the skills you know and choose your proficiency level.
+    </p>
+
+    <div class="add-skill-row">
+        <select id="skill-picker">
+            <option value="">Choose a skill...</option>
+
+            {% for field in form.skill_fields %}
+                <option value="{{ field.html_name }}">
+                    {{ field.label }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="button"
+                id="add-skill-button"
+                class="create-class-button">
+            + Add Skill
+        </button>
+    </div>
+
+    <div id="selected-skills" class="skill-options">
+        {% for field in form.skill_fields %}
+            <div class="skill-option"
+                 data-skill="{{ field.html_name }}">
+
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+
+                {{ field }}
+
+                <button type="button"
+                        class="remove-skill-button"
+                        aria-label="Remove {{ field.label }}">
+                    Remove
+                </button>
+
+                {% for error in field.errors %}
+                    <p class="field-error">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 
         <div class="form-actions">
 
@@ -85,4 +158,65 @@
 
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const picker = document.getElementById("skill-picker");
+    const addButton = document.getElementById("add-skill-button");
+    const rows = document.querySelectorAll(".skill-option");
+
+    function refreshSkills() {
+        rows.forEach(function (row) {
+            const select = row.querySelector("select");
+            const selected = select.value !== "";
+
+            row.hidden = !selected;
+
+            const option = picker.querySelector(
+                'option[value="' + row.dataset.skill + '"]'
+            );
+
+            if (option) {
+                option.hidden = selected;
+                option.disabled = selected;
+            }
+        });
+
+        picker.value = "";
+    }
+
+    addButton.addEventListener("click", function () {
+        const selectedSkill = picker.value;
+
+        if (!selectedSkill) {
+            return;
+        }
+
+        const row = document.querySelector(
+            '.skill-option[data-skill="' + selectedSkill + '"]'
+        );
+
+        if (row) {
+            row.querySelector("select").value = "1";
+            picker.value = "";
+            refreshSkills();
+        }
+    });
+
+    rows.forEach(function (row) {
+        row.querySelector(".remove-skill-button")
+            .addEventListener("click", function () {
+                row.querySelector("select").value = "";
+                refreshSkills();
+            });
+
+        row.querySelector("select")
+            .addEventListener("change", refreshSkills);
+    });
+
+    refreshSkills();
+});
+</script>
 {% endblock %}

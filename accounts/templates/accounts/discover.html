@@ -1,18 +1,21 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block title %}Discover - Team Match{% endblock %}
 
 {% block content %}
 
-<div class="discover-header">
-    <h1 class="page-title">Discover Projects</h1>
+<div class="discover-page">
 
-    <p class="page-subtitle">
-        Find projects and teams that match your skills and interests.
-    </p>
-</div>
+    <div class="discover-header">
+        <div>
+            <span class="discover-eyebrow">FIND YOUR NEXT TEAM</span>
+            <h1 class="page-title">Discover Projects</h1>
+            <p class="page-subtitle">
+                Explore projects, discover new ideas, and find
+                teammates who share your interests.
+            </p>
+        </div>
 
 <div class="discover-tools">
 
@@ -20,8 +23,9 @@
         id="project-search"
         class="search-input"
         type="search"
-        placeholder="Search projects..."
-        autocompleted="off"
+        placeholder="Search by project, course, or skill"
+        autocomplete="off"
+        aria-label="Search projects"
     >
 
     <button class="filter-button" type="button">
@@ -30,61 +34,71 @@
 
 </div>
 
+<div class="discover-section-header">
+    <div>
+        <h2 class="section-title">Explore Projects</h2>
+        <P>Find something you'd love to work on.</P>
+    </div>
+        <span class="project-total">
+            {{ projects|length }} projects
+        </span>
+    </div>
 
-<h2 class="section-title">Recommended for You</h2>
 
+    <div class="project-list">
+        {% for project in projects %}
+            <article class="project-card searchable-project">
 
-<div class="project-list">
+                <div class="project-card-header">
+                    <div>
+                        <span class="project-category">
+                            {{ project.course }}
+                        </span>
+                        <h2>{{ project.title }}</h2>
+                    </div>
 
-    {% for project in projects %}
-
-        <article class="project-card searchable-project">
-
-            <div class="project-card-header">
-
-                <div>
-                    <h2>{{ project.title }}</h2>
-                    <p class="project-course">{{ project.course }}</p>
+                    <span class="member-count">
+                        {{ project.members|length }}/{{ project.max_members }}
+                        members
+                    </span>
                 </div>
 
-                <span class="member-count">
-                    {{ project.members|length }} / {{ project.max_members }} members
-                </span>
+                <p class="project-description">
+                    {{ project.description }}
+                </p>
 
+                <div class="tags">
+                    {% for skill in project.skills %}
+                        <span class="tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="project-footer">
+                    <span class="project-availability">
+                        {{ project.members|length }} of
+                        {{ project.max_members }} spots filled
+                    </span>
+
+                    <a href="{% url 'project_detail' project.id %}"
+                       class="project-link">
+                        View Project &rarr;
+                    </a>
+                </div>
+
+            </article>
+        {% empty %}
+            <div class="discover-empty">
+                <h3>No projects available yet</h3>
+                <p>Check back later for new opportunities.</p>
             </div>
+        {% endfor %}
+    </div>
 
-
-            <p class="project-description">
-                {{ project.description }}
-            </p>
-
-
-            <div class="tags">
-
-                {% for skill in project.skills %}
-                    <span class="tag">{{ skill }}</span>
-                {% endfor %}
-
-            </div>
-
-
-            <div class="project-footer">
-
-                <a href="{% url 'project_detail' project.id %}" class="project-link">
-                    View Project →
-                </a>
-
-            </div>
-
-        </article>
-
-    {% endfor %}
+    <p id="no-project-results" class="no-results" hidden>
+        No projects match your search.
+    </p>
 
 </div>
-
-<p id="no-project-results" class="no-results" hidden>
-    No projects match your search
-</p>
 
 {% endblock %}
 

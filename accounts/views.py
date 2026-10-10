@@ -4,8 +4,9 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.db import transaction
 from django.http import Http404
+from boards.models import Class
 
-from .forms import StudentProfileForm, StudentSignUpForm
+from .forms import StudentProfileForm, StudentSignUpForm, ClassForm
 from .models import StudentProfile
 
 TEMP_PROJECTS = [
@@ -107,7 +108,7 @@ def project_detail(request, project_id):
 
 def signup(request):
     if request.user.is_authenticated:
-        return redirect("discover")
+        return redirect("home")
 
     if request.method == "POST":
         form = StudentSignUpForm(request.POST)
@@ -122,3 +123,48 @@ def signup(request):
         form = StudentSignUpForm()
 
     return render(request, "accounts/signup.html", {"form": form})
+
+@login_required
+def professor_classes(request):
+    if not hasattr(request.user, "teacherprofile"):
+        raise PermissionDenied
+
+    classes = Class.objects.filter(
+        teacher=request.user
+    ).prefetch_related("members")
+
+    return render(
+        request,
+        "accounts/professor_classes.html",
+        {"classes": classes},
+    )
+
+@login_required
+def home(request):
+    if hasattr(request.user, "teacherprofile"):
+        return redirect("professor_classes")
+
+    return redirect("discover")
+
+@login_required
+def create_class(request):
+    if not hasattr(request.user, "teacherprofile"):
+        raise PermissionDenied
+
+    if request.method == "POST":
+        form = ClassForm(request.POST)
+
+        if form.is_valid():
+            new_class = form.save(commit=False)
+            new_class.teacher = request.user
+            new_class.save()
+
+            return redirect("professor_classes")
+    else:
+        form = ClassForm()
+
+    return render(
+        request,
+        "accounts/create_class.html",
+        {"form": form},
+    )

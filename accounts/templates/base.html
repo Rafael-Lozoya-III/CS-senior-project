@@ -20,21 +20,26 @@
         <div class="nav-container {% if not request.user.is_authenticated %}logged-out-nav{% endif %}">
 
             {% if request.user.is_authenticated %}
-                <a href="{% url 'discover' %}" class="logo-link">
+                <a href="{% url 'home' %}" class="logo-link">
                     Team Match
                 </a>
 
                 <div class="nav-links">
-                    <a href="{% url 'discover' %}"
-                    class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
-                        Discover
-                    </a>
+                    {% if request.user.teacherprofile %}
+                        <a href="{% url 'professor_classes' %}"
+                        class="{% if request.resolver_match.url_name == 'professor_classes' %}active{% endif %}">
+                            My Classes
+                        </a>
+                    {% else %}
+                        <a href="{% url 'discover' %}"
+                        class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
+                            Discover
+                        </a>
 
-                    {% if not request.user.teacherprofile %}
                         <a href="#">My Teams</a>
 
                         <a href="{% url 'profile' %}"
-                           class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                        class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
                             Profile
                         </a>
                     {% endif %}

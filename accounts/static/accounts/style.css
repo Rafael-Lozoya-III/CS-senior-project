@@ -196,6 +196,147 @@ body {
     text-decoration: none;
 }
 
+
+/* Student Profile Redesign */
+
+.student-profile-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.student-profile-title {
+    margin-bottom: 26px;
+}
+
+.profile-eyebrow {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #2563eb;
+    margin-bottom: 12px;
+}
+
+.student-profile-card {
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.student-profile-card .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 28px;
+}
+
+.student-profile-card .profile-person {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.student-profile-card .avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+    background: #e8f0ff;
+    color: #2454a6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.student-profile-card .profile-name {
+    font-size: 23px;
+    margin: 0 0 6px;
+}
+
+.student-profile-card .profile-grade {
+    color: #667085;
+    font-size: 14px;
+    margin: 0;
+}
+
+.student-profile-card .edit-button {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.student-profile-card .edit-button:hover {
+    background: #1d4ed8;
+}
+
+.student-profile-card .profile-section {
+    border-top: 1px solid #e4e7ec;
+    padding: 26px 0;
+}
+
+.student-profile-card .profile-section:last-child {
+    padding-bottom: 0;
+}
+
+.student-profile-card .profile-section h3 {
+    font-size: 17px;
+    margin: 0 0 14px;
+}
+
+.student-profile-card .profile-section p {
+    line-height: 1.7;
+}
+
+.student-profile-card .profile-placeholder {
+    color: #98a2b3;
+}
+
+.student-profile-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.student-profile-card .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.student-profile-card .skill-level {
+    font-size: 11px;
+    color: #475467;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .student-profile-card {
+        padding: 22px;
+    }
+
+    .student-profile-card .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .student-profile-card .avatar {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+
 /* Edit Profile */
 
 .page-subtitle {
@@ -647,4 +788,303 @@ body {
     border-radius: 8px;
     margin-top: 6px;
     box-sizing: border-box;
+}
+
+
+/* Professor Dashboard */
+
+.professor-dashboard {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.professor-header {
+    margin-bottom: 32px;
+}
+
+.professor-header h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: #182230;
+}
+
+.professor-header p {
+    color: #667085;
+    margin: 0;
+}
+
+.professor-classes {
+    display: grid;
+    gap: 16px;
+}
+
+.professor-class-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 26px 28px;
+    background: white;
+    border: 1px solid #e4e7ec;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #182230;
+    box-shadow: 0 2px 8px rgba(16, 24, 40, 0.03);
+    transition: border-color 0.2s, box-shadow 0.2s,
+                transform 0.2s;
+}
+
+.professor-class-card:hover {
+    border-color: #98b5e2;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+    transform: translateY(-2px);
+}
+
+.professor-class-card h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.professor-class-card p {
+    margin: 0 0 14px;
+    color: #667085;
+    line-height: 1.5;
+}
+
+.professor-class-card span {
+    font-size: 14px;
+    color: #475467;
+}
+
+.professor-class-card .class-arrow {
+    font-size: 26px;
+    color: #667085;
+}
+
+.professor-empty {
+    background: white;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    padding: 56px 28px;
+    text-align: center;
+}
+
+.professor-empty h2 {
+    margin: 0 0 10px;
+    font-size: 21px;
+}
+
+.professor-empty p {
+    margin: 0;
+    color: #667085;
+}
+
+@media (max-width: 600px) {
+    .professor-header h1 {
+        font-size: 27px;
+    }
+
+    .professor-class-card {
+        padding: 20px;
+    }
+}
+
+.professor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.create-class-button {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.create-class-button:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+    .professor-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Discover card footer */
+
+.discover-page .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e4e7ec;
+}
+
+.discover-page .project-availability {
+    color: #667085;
+    font-size: 13px;
+}
+
+.discover-page .project-link {
+    margin-left: auto;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.discover-page .discover-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.discover-page .project-total {
+    color: #667085;
+    font-size: 13px;
+}
+
+
+/* Edit Profile - Skills and Interests */
+
+.form-help {
+    color: #667085;
+    font-size: 13px;
+    margin: 6px 0 16px;
+    line-height: 1.5;
+}
+
+.interest-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.interest-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border: 1px solid #e4e7ec;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.interest-option:has(input:checked) {
+    background: #eff6ff;
+    border-color: #93c5fd;
+}
+
+.interest-option input {
+    width: auto;
+    margin: 0;
+    accent-color: #2563eb;
+}
+
+.skill-options {
+    display: grid;
+    gap: 14px;
+}
+
+.skill-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.skill-option label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.skill-option select {
+    width: 190px;
+    max-width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: white;
+}
+
+@media (max-width: 600px) {
+    .skill-option {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .skill-option select {
+        width: 100%;
+    }
+}
+
+
+/* Dynamic Skill Selector */
+
+.add-skill-row {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0 24px;
+}
+
+.add-skill-row select {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: white;
+}
+
+.add-skill-row button {
+    border: none;
+    cursor: pointer;
+}
+
+.skill-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.skill-option label {
+    flex: 1;
+}
+
+.remove-skill-button {
+    border: none;
+    background: transparent;
+    color: #b42318;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.remove-skill-button:hover {
+    text-decoration: underline;
+}
+
+/* Ensure hidden skill rows stay hidden */
+.skill-option[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+    .add-skill-row {
+        flex-direction: column;
+    }
 }
