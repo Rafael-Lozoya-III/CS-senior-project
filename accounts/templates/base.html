@@ -53,7 +53,8 @@
                 </div>
 
             {% else %}
-                <a href="{% url 'login' %}" class="logo-link">
+                <a href="{% url 'login' %}" class="logo-link auth-logo">
+                    <span class="auth-logo-icon">✦</span>
                     Team Match
                 </a>
             {% endif %}
@@ -61,7 +62,7 @@
         </div>
     </nav>
 
-    <main class="page-container">
+    <main class="page-container {% block main_class %}{% endblock %}">
         {% block content %}
         {% endblock %}
     </main>

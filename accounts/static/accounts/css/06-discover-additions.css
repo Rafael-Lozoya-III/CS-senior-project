@@ -1,0 +1,65 @@
+/* Discover card enhancements — extracted in original cascade order. */
+
+/* Discover card footer */
+
+.discover-page .project-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+
+    margin-top: 24px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #e4e7ec;
+
+}
+
+.discover-page .project-availability {
+
+    color: #667085;
+
+    font-size: 13px;
+
+}
+
+.discover-page .project-link {
+
+    margin-left: auto;
+
+    white-space: nowrap;
+
+    font-weight: 600;
+
+}
+
+.discover-page .discover-section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 18px;
+
+}
+
+.discover-page .project-total {
+
+    color: #667085;
+
+    font-size: 13px;
+
+}

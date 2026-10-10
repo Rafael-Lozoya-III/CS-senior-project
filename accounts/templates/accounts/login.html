@@ -1,13 +1,25 @@
+
 {% extends "base.html" %}
 
 {% block title %}Sign In - Team Match{% endblock %}
 
-{% block content %}
+{% block main_class %}auth-page{% endblock %}
 
+{% block content %}
 <div class="login-container">
     <div class="login-card">
-        <h1>Welcome!</h1>
-        <p>Sign in to your Team Match account.</p>
+
+        <div class="login-heading">
+    <div class="login-icon">✦</div>
+
+    <p class="login-brand">TEAM MATCH</p>
+    <h1>Welcome back!</h1>
+
+            <p>
+                Sign in to find teammates, explore projects,
+                and collaborate with your class.
+            </p>
+        </div>
 
         {% if form.errors %}
             <p class="login-error">
@@ -34,11 +46,12 @@
                 Sign In
             </button>
 
-            <a href="{% url 'signup' %}" class="signup-button">
-                Create Account
-            </a>
+            <p class="signup-text">
+                New to Team Match?
+                <a href="{% url 'signup' %}">Create an account</a>
+            </p>
         </form>
+
     </div>
 </div>
-
 {% endblock %}

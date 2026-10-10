@@ -1,0 +1,219 @@
+/* Skills and interests editing — extracted in original cascade order. */
+
+/* Edit Profile - Skills and Interests */
+
+.form-help {
+
+    color: #667085;
+
+    font-size: 13px;
+
+    margin: 6px 0 16px;
+
+    line-height: 1.5;
+
+}
+
+.interest-options {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 16px;
+
+}
+
+.interest-option {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+.interest-option:has(input:checked) {
+
+    background: #eff6ff;
+
+    border-color: #93c5fd;
+
+}
+
+.interest-option input {
+
+    width: auto;
+
+    margin: 0;
+
+    accent-color: #2563eb;
+
+}
+
+.skill-options {
+
+    display: grid;
+
+    gap: 14px;
+
+}
+
+.skill-option {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+
+.skill-option label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.skill-option select {
+
+    width: 190px;
+
+    max-width: 100%;
+
+    padding: 9px 12px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+@media (max-width: 600px) {
+
+    .skill-option {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    .skill-option select {
+
+        width: 100%;
+
+    }
+
+}
+
+/* Dynamic Skill Selector */
+
+.add-skill-row {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin: 16px 0 24px;
+
+}
+
+.add-skill-row select {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 10px 12px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+.add-skill-row button {
+
+    border: none;
+
+    cursor: pointer;
+
+}
+
+.skill-option {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.skill-option label {
+
+    flex: 1;
+
+}
+
+.remove-skill-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #b42318;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+.remove-skill-button:hover {
+
+    text-decoration: underline;
+
+}
+
+/* Ensure hidden skill rows stay hidden */
+
+.skill-option[hidden] {
+
+    display: none !important;
+
+}
+
+@media (max-width: 600px) {
+
+    .add-skill-row {
+
+        flex-direction: column;
+
+    }
+
+}

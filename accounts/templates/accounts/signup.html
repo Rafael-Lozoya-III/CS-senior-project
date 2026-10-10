@@ -2,11 +2,24 @@
 
 {% block title %}Create Account - Team Match{% endblock %}
 
+{% block main_class %}auth-page{% endblock %}
+
 {% block content %}
 <div class="login-container">
-    <div class="login-card">
-        <h1>Create Account</h1>
-        <p>Sign up using your UTRGV school email.</p>
+    <div class="login-card signup-card">
+
+        <div class="login-heading">
+            <div class="login-icon">✦</div>
+
+            <p class="login-brand">TEAM MATCH</p>
+
+            <h1>Join Team Match!</h1>
+
+            <p>
+                Find your people, share your ideas,
+                and build something amazing together.
+            </p>
+        </div>
 
         <form method="post">
             {% csrf_token %}
@@ -25,6 +38,10 @@
 
                     {{ field }}
 
+                    {% if field.help_text and field.name != "username" and field.name != "password1" and field.name != "password2" %}
+                        <p class="signup-help">{{ field.help_text }}</p>
+                    {% endif %}
+
                     {% for error in field.errors %}
                         <p class="login-error">{{ error }}</p>
                     {% endfor %}
@@ -34,12 +51,13 @@
             <button type="submit" class="save-button">
                 Create Account
             </button>
+
+            <p class="signup-text">
+                Already have an account?
+                <a href="{% url 'login' %}">Sign In</a>
+            </p>
         </form>
 
-        <p class="signup-text">
-            Already have an account?
-            <a href="{% url 'login' %}">Sign In</a>
-        </p>
     </div>
 </div>
 {% endblock %}

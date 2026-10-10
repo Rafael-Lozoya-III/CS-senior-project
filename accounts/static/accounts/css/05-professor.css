@@ -1,0 +1,213 @@
+/* Professor dashboard and class creation — extracted in original cascade order. */
+
+/* Professor Dashboard */
+
+.professor-dashboard {
+
+    max-width: 960px;
+
+    margin: 0 auto;
+
+}
+
+.professor-header {
+
+    margin-bottom: 32px;
+
+}
+
+.professor-header h1 {
+
+    font-size: 32px;
+
+    margin: 0 0 8px;
+
+    color: #182230;
+
+}
+
+.professor-header p {
+
+    color: #667085;
+
+    margin: 0;
+
+}
+
+.professor-classes {
+
+    display: grid;
+
+    gap: 16px;
+
+}
+
+.professor-class-card {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 26px 28px;
+
+    background: white;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: #182230;
+
+    box-shadow: 0 2px 8px rgba(16, 24, 40, 0.03);
+
+    transition: border-color 0.2s, box-shadow 0.2s,
+
+                transform 0.2s;
+
+}
+
+.professor-class-card:hover {
+
+    border-color: #98b5e2;
+
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+
+    transform: translateY(-2px);
+
+}
+
+.professor-class-card h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 20px;
+
+}
+
+.professor-class-card p {
+
+    margin: 0 0 14px;
+
+    color: #667085;
+
+    line-height: 1.5;
+
+}
+
+.professor-class-card span {
+
+    font-size: 14px;
+
+    color: #475467;
+
+}
+
+.professor-class-card .class-arrow {
+
+    font-size: 26px;
+
+    color: #667085;
+
+}
+
+.professor-empty {
+
+    background: white;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 14px;
+
+    padding: 56px 28px;
+
+    text-align: center;
+
+}
+
+.professor-empty h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 21px;
+
+}
+
+.professor-empty p {
+
+    margin: 0;
+
+    color: #667085;
+
+}
+
+@media (max-width: 600px) {
+
+    .professor-header h1 {
+
+        font-size: 27px;
+
+    }
+
+    .professor-class-card {
+
+        padding: 20px;
+
+    }
+
+}
+
+.professor-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.create-class-button {
+
+    display: inline-block;
+
+    padding: 12px 18px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+.create-class-button:hover {
+
+    background: #1d4ed8;
+
+}
+
+@media (max-width: 600px) {
+
+    .professor-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+}

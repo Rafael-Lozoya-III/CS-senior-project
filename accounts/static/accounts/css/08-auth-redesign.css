@@ -1,0 +1,605 @@
+/* Current login/signup design and UTRGV background — extracted in original cascade order. */
+
+/* Login page redesign */
+
+.login-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: calc(100vh - 160px);
+
+    padding: 40px 20px;
+
+}
+
+.login-card {
+
+    width: 100%;
+
+    max-width: 390px;
+
+    padding: 40px;
+
+    background: white;
+
+    border: 1px solid #e0e4ea;
+
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.05);
+
+}
+
+.login-heading {
+
+    text-align: center;
+
+    margin-bottom: 28px;
+
+}
+
+.login-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 54px;
+
+    height: 54px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 16px;
+
+    background: #eef3ff;
+
+    color: #4b69ad;
+
+    font-size: 30px;
+
+}
+
+.login-heading h1 {
+
+    margin: 0 0 10px;
+
+    font-size: 28px;
+
+}
+
+.login-heading p {
+
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+.login-card .form-field label {
+
+    display: block;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+}
+
+.login-card input[type="text"],
+
+.login-card input[type="password"] {
+
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+}
+
+.login-card input:focus {
+
+    outline: none;
+
+    border-color: #6686c5;
+
+    box-shadow: 0 0 0 3px rgba(102, 134, 197, 0.12);
+
+}
+
+.login-card .save-button {
+
+    width: 100%;
+
+    margin-top: 4px;
+
+    border-radius: 8px;
+
+}
+
+.login-card .signup-text {
+
+    text-align: center;
+
+    margin: 4px 0 0;
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+.login-card .signup-text a {
+
+    color: #315a9c;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+}
+
+.login-card .signup-text a:hover {
+
+    text-decoration: underline;
+
+}
+
+@media (max-width: 480px) {
+
+    .login-card {
+
+        padding: 28px 24px;
+
+    }
+
+}
+
+/* Larger login card */
+
+.login-card {
+
+    max-width: 500px;
+
+    padding: 48px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 16px 48px rgba(16, 24, 40, 0.12);
+
+}
+
+.login-heading h1 {
+
+    font-size: 32px;
+
+}
+
+.login-card input[type="text"],
+
+.login-card input[type="password"] {
+
+    padding: 15px;
+
+    font-size: 15px;
+
+}
+
+.login-card .save-button {
+
+    padding: 15px;
+
+    font-size: 15px;
+
+}
+
+@media (max-width: 600px) {
+
+    .login-card {
+
+        padding: 28px 24px;
+
+    }
+
+}
+
+.login-brand {
+
+    color: #315a9c !important;
+
+    font-size: 13px !important;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px !important;
+
+}
+
+/* Full-width authentication pages */
+
+.page-container.auth-page {
+
+    max-width: none;
+
+    width: 100%;
+
+    min-height: calc(100vh - 72px);
+
+    padding: 0;
+
+    margin: 0;
+
+}
+
+.auth-page .login-container {
+
+    min-height: calc(100vh - 72px);
+
+    box-sizing: border-box;
+
+    padding: 48px 24px;
+
+    background-image:
+
+        linear-gradient(
+
+            rgba(18, 31, 54, 0.40),
+
+            rgba(18, 31, 54, 0.40)
+
+        ),
+
+        url("../images/utrgv-campus.jpg");
+
+    background-size: cover;
+
+    background-position: center 100%;
+
+    background-repeat: no-repeat;
+
+}
+
+.auth-page .login-card {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.40);
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.20);
+
+}
+
+/* Authentication header */
+
+.logged-out-nav {
+
+    justify-content: flex-start;
+
+}
+
+.auth-logo {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+}
+
+.auth-logo-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 10px;
+
+    background: #eef3ff;
+
+    color: #4267a9;
+
+    font-size: 21px;
+
+}
+
+/* Signup page */
+
+.auth-page .signup-card {
+
+    max-width: 540px;
+
+    padding: 42px 48px;
+
+}
+
+.signup-card .login-heading {
+
+    margin-bottom: 24px;
+
+}
+
+.signup-card .login-heading h1 {
+
+    font-size: 30px;
+
+}
+
+.signup-card .form-field input,
+
+.signup-card .form-field select {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    background: white;
+
+}
+
+.signup-card .form-field input:focus,
+
+.signup-card .form-field select:focus {
+
+    outline: none;
+
+    border-color: #6686c5;
+
+    box-shadow: 0 0 0 3px rgba(102, 134, 197, 0.12);
+
+}
+
+.signup-card .signup-help {
+
+    margin: 6px 0 0;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #667085;
+
+}
+
+.signup-card .login-error {
+
+    margin-top: 6px;
+
+    font-size: 13px;
+
+}
+
+.signup-card .save-button {
+
+    margin-top: 8px;
+
+}
+
+@media (max-width: 600px) {
+
+    .auth-page .signup-card {
+
+        padding: 28px 24px;
+
+    }
+
+}
+
+/* Authentication readability improvements */
+
+.auth-page .login-card,
+
+.auth-page .signup-card {
+
+    background: #ffffff;
+
+    opacity: 1;
+
+    color: #1f2937;
+
+}
+
+/* Make both authentication cards more readable */
+
+.auth-page .login-heading h1 {
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: #172033;
+
+}
+
+.auth-page .login-heading p:not(.login-brand) {
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: #475467;
+
+}
+
+.auth-page .login-brand {
+
+    font-size: 14px !important;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #315a9c !important;
+
+}
+
+/* Make form labels and inputs larger */
+
+.auth-page .login-card .form-field label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #1f2937;
+
+}
+
+.auth-page .login-card .form-field input,
+
+.auth-page .login-card .form-field select {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    min-height: 46px;
+
+    padding: 12px 14px;
+
+    font-size: 16px;
+
+    color: #1f2937;
+
+    background: #ffffff;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+}
+
+/* Larger action button */
+
+.auth-page .login-card .save-button {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+/* Larger Sign In / Create Account links */
+
+.auth-page .login-card .signup-text {
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    color: #475467;
+
+}
+
+.auth-page .login-card .signup-text a {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #2459a6;
+
+}
+
+/* Signup help and error messages */
+
+.auth-page .signup-help {
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #475467;
+
+}
+
+.auth-page .login-error {
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+/* Signup layout adjustments */
+
+.auth-page .signup-card {
+
+    max-width: 560px;
+
+    padding: 36px 44px;
+
+}
+
+.signup-card .login-heading {
+
+    margin-bottom: 20px;
+
+}
+
+.signup-card form {
+
+    gap: 14px;
+
+}
+
+@media (max-width: 600px) {
+
+    .auth-page .signup-card {
+
+        padding: 28px 24px;
+
+    }
+
+}
