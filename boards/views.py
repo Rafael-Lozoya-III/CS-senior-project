@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.db.models import Q, Max, Count
 from .models import Class, Team, Thread, Post
@@ -154,11 +155,23 @@ def new_thread(request, scope, slug, team_slug=None):
 
 
 @login_required
+@require_POST
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     thread = post.thread
+
     if post.author != request.user and not request.user.is_staff:
         messages.error(request, "You can't delete that post.")
         return redirect(thread.get_absolute_url())
+
+    if thread.class_group and not _can_access_class(request.user, thread.class_group):
+        messages.error(request, "You don't have access to that thread.")
+        return redirect('board_list')
+
+    if thread.team and not _can_access_team(request.user, thread.team):
+        messages.error(request, "You don't have access to that thread.")
+        return redirect('board_list')
+
     post.delete()
+    messages.success(request, "Post deleted.")
     return redirect(thread.get_absolute_url())

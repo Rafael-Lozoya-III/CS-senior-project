@@ -1,5 +1,19 @@
 {% extends "boards/base.html" %}
+{% block professor_back_link %}{% endblock %}
 {% block content %}
+{% if thread.class_group %}
+    <p>
+        <a href="{{ thread.class_group.get_absolute_url }}">
+            ← Back to {{ thread.class_group.name }}
+        </a>
+    </p>
+{% elif thread.team %}
+    <p>
+        <a href="{{ thread.team.get_absolute_url }}">
+            ← Back to {{ thread.team.name }}
+        </a>
+    </p>
+{% endif %}
 <h1>{{ thread.title }}</h1>
 <p class="meta">
     by {{ thread.author.username }} · {{ thread.created_at }}
@@ -39,7 +53,13 @@
         </details>
 
         {% if post.author == user %}
-            <a class="meta" href="{% url 'delete_post' post.pk %}">delete</a>
+            <form method="post" action="{% url 'delete_post' post.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn"
+                        onclick="return confirm('Delete this post?');">
+                    Delete
+                </button>
+            </form>
         {% endif %}
     </div>
 {% endfor %}

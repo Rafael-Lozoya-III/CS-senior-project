@@ -13,6 +13,7 @@
     <p>You aren't enrolled in any classes yet.</p>
 {% endfor %}
 
+{% if not request.user.teacherprofile %}
 <h2>Teams</h2>
 {% for t in my_teams %}
     <div class="card">
@@ -22,4 +23,5 @@
 {% empty %}
     <p>You aren't on any teams yet.</p>
 {% endfor %}
+{% endif %}
 {% endblock %}

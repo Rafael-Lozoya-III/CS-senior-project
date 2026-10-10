@@ -33,7 +33,25 @@
 </head>
 <body>
 <nav>
-    <div><a href="{% url 'board_list' %}"><strong>Discussion Boards</strong></a></div>
+    <div>
+        {% if user.is_authenticated %}
+            {% if user.teacherprofile %}
+        {% block professor_back_link %}
+            <a href="{% url 'professor_classes' %}">
+                <strong>← Back to My Classes</strong>
+            </a>
+        {% endblock %}
+            {% else %}
+                <a href="{% url 'board_list' %}">
+                    <strong>Discussion Boards</strong>
+                </a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}">
+                <strong>Team Match</strong>
+            </a>
+        {% endif %}
+    </div>
     <div>
         {% if user.is_authenticated %}
             {{ user.username }} |

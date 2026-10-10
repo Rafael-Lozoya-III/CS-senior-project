@@ -1,12 +1,6 @@
 {% extends "boards/base.html" %}
 {% block content %}
-{% if request.user == class_group.teacher %}
-    <p>
-        <a href="{% url 'professor_classes' %}">
-            ← Back to My Classes
-        </a>
-    </p>
-{% endif %}
+
 <h1>{{ class_group.name }}</h1>
 <p>{{ class_group.description }}</p>
 <p class="meta">Teacher: {{ class_group.teacher.username }}</p>
