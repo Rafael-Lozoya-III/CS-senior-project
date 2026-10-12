@@ -1,162 +1,297 @@
+
 {% extends "base.html" %}
 
 {% block title %}Edit Profile - Team Match{% endblock %}
 
 {% block content %}
 
-<h1 class="page-title">Edit Profile</h1>
+<div class="profile-editor-page">
 
-<p class="page-subtitle">
-    Update your student profile information.
-</p>
+    <!-- Header -->
+    <section class="profile-editor-hero">
+        <div class="profile-editor-hero-content">
+            <span class="profile-editor-eyebrow">
+                ✦ MAKE IT YOURS
+            </span>
 
-<section class="form-card">
+            <h1>Tell your story<span>.</span></h1>
 
-    <form method="post" class="profile-form">
+            <p>
+                Show other students who you are, what you're good at,
+                and what kind of projects excite you.
+            </p>
+
+            <a href="{% url 'profile' %}" class="profile-editor-back">
+                ← Back to My Profile
+            </a>
+        </div>
+
+        <div class="profile-editor-hero-art" aria-hidden="true">
+            <div class="profile-editor-art-circle"></div>
+            <div class="profile-editor-art-card">
+                <div class="profile-editor-art-avatar">✦</div>
+                <div class="profile-editor-art-line"></div>
+                <div class="profile-editor-art-line short"></div>
+                <div class="profile-editor-art-tags">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <form method="post" class="profile-editor-form">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
-            <div class="form-errors">
+            <div class="profile-editor-error-summary" role="alert">
                 {{ form.non_field_errors }}
             </div>
         {% endif %}
 
-        <div class="form-group">
-            <label for="{{ form.first_name.id_for_label }}">
-                First Name
-            </label>
+        <!-- Section 1: Personal details -->
+        <section class="profile-editor-section">
+            <div class="profile-editor-section-heading">
+                <span class="profile-editor-step">01</span>
 
-            {{ form.first_name }}
-
-            {% for error in form.first_name.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.last_name.id_for_label }}">
-                Last Name
-            </label>
-
-            {{ form.last_name }}
-
-            {% for error in form.last_name.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.grade_level.id_for_label }}">
-                Grade Level
-            </label>
-
-            {{ form.grade_level }}
-
-            {% for error in form.grade_level.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.experience.id_for_label }}">
-                About Me
-            </label>
-
-            {{ form.experience }}
-
-            {% for error in form.experience.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <div class="form-group">
-            <h3>Interests</h3>
-            <p class="form-help">
-                Choose the topics you're interested in.
-            </p>
-
-            <div class="interest-options">
-                {% for checkbox in form.interests %}
-                    <label class="interest-option">
-                        {{ checkbox.tag }}
-                        <span>{{ checkbox.choice_label }}</span>
-                    </label>
-                {% empty %}
-                    <p>No interests available yet.</p>
-                {% endfor %}
+                <div>
+                    <span class="profile-editor-section-eyebrow">
+                        THE BASICS
+                    </span>
+                    <h2>Personal Information</h2>
+                    <p>Start with the details other students will see.</p>
+                </div>
             </div>
 
-            {% for error in form.interests.errors %}
-                <p class="field-error">{{ error }}</p>
-            {% endfor %}
-        </div>
+            <div class="profile-editor-panel">
+                <div class="profile-editor-field-grid">
 
-<div class="form-group">
-    <h3>Skills</h3>
+                    <div class="profile-editor-field">
+                        <label for="{{ form.first_name.id_for_label }}">
+                            First Name
+                        </label>
 
-    <p class="form-help">
-        Add the skills you know and choose your proficiency level.
-    </p>
+                        {{ form.first_name }}
 
-    <div class="add-skill-row">
-        <select id="skill-picker">
-            <option value="">Choose a skill...</option>
+                        {% for error in form.first_name.errors %}
+                            <p class="field-error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
 
-            {% for field in form.skill_fields %}
-                <option value="{{ field.html_name }}">
-                    {{ field.label }}
-                </option>
-            {% endfor %}
-        </select>
+                    <div class="profile-editor-field">
+                        <label for="{{ form.last_name.id_for_label }}">
+                            Last Name
+                        </label>
 
-        <button type="button"
-                id="add-skill-button"
-                class="create-class-button">
-            + Add Skill
-        </button>
-    </div>
+                        {{ form.last_name }}
 
-    <div id="selected-skills" class="skill-options">
-        {% for field in form.skill_fields %}
-            <div class="skill-option"
-                 data-skill="{{ field.html_name }}">
+                        {% for error in form.last_name.errors %}
+                            <p class="field-error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
 
-                <label for="{{ field.id_for_label }}">
-                    {{ field.label }}
-                </label>
+                </div>
 
-                {{ field }}
+                <div class="profile-editor-field">
+                    <label for="{{ form.grade_level.id_for_label }}">
+                        Grade Level
+                    </label>
 
-                <button type="button"
-                        class="remove-skill-button"
-                        aria-label="Remove {{ field.label }}">
-                    Remove
-                </button>
+                    {{ form.grade_level }}
 
-                {% for error in field.errors %}
+                    {% for error in form.grade_level.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: About -->
+        <section class="profile-editor-section">
+            <div class="profile-editor-section-heading">
+                <span class="profile-editor-step">02</span>
+
+                <div>
+                    <span class="profile-editor-section-eyebrow">
+                        YOUR BACKGROUND
+                    </span>
+                    <h2>About Me</h2>
+                    <p>
+                        Share your experience, goals, or the kind
+                        of work you enjoy doing.
+                    </p>
+                </div>
+            </div>
+
+            <div class="profile-editor-panel">
+                <div class="profile-editor-field">
+                    <label for="{{ form.experience.id_for_label }}">
+                        Your Story
+                    </label>
+
+                    {{ form.experience }}
+
+                    <p class="profile-editor-help">
+                        A few sentences are enough. You can always update this later.
+                    </p>
+
+                    {% for error in form.experience.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Interests -->
+        <section class="profile-editor-section">
+            <div class="profile-editor-section-heading">
+                <span class="profile-editor-step">03</span>
+
+                <div>
+                    <span class="profile-editor-section-eyebrow">
+                        WHAT INSPIRES YOU
+                    </span>
+                    <h2>Your Interests</h2>
+                    <p>
+                        Choose the topics that you'd love
+                        to explore with a team.
+                    </p>
+                </div>
+            </div>
+
+            <div class="profile-editor-panel">
+                <div class="profile-editor-interest-grid">
+                    {% for checkbox in form.interests %}
+                        <label class="profile-editor-interest-option">
+                            {{ checkbox.tag }}
+                            <span>{{ checkbox.choice_label }}</span>
+                        </label>
+                    {% empty %}
+                        <p class="profile-editor-help">
+                            No interests are available yet.
+                        </p>
+                    {% endfor %}
+                </div>
+
+                {% for error in form.interests.errors %}
                     <p class="field-error">{{ error }}</p>
                 {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-</div>
+        </section>
 
+        <!-- Section 4: Skills -->
+        <section class="profile-editor-section">
+            <div class="profile-editor-section-heading">
+                <span class="profile-editor-step">04</span>
 
-        <div class="form-actions">
+                <div>
+                    <span class="profile-editor-section-eyebrow">
+                        YOUR STRENGTHS
+                    </span>
+                    <h2>Skills & Expertise</h2>
+                    <p>
+                        Add your skills and select how comfortable
+                        you are with each one.
+                    </p>
+                </div>
+            </div>
 
-            <a href="{% url 'profile' %}" class="cancel-button">
-                Cancel
-            </a>
+            <div class="profile-editor-panel">
 
-            <button type="submit" class="save-button">
-                Save Changes
-            </button>
+                <label for="skill-picker"
+                       class="profile-editor-input-label">
+                    Add a Skill
+                </label>
 
+                <div class="profile-editor-add-skill-row">
+                    <select id="skill-picker">
+                        <option value="">Choose a skill...</option>
+
+                        {% for field in form.skill_fields %}
+                            <option value="{{ field.html_name }}">
+                                {{ field.label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    <button type="button"
+                            id="add-skill-button"
+                            class="profile-editor-add-button">
+                        + Add Skill
+                    </button>
+                </div>
+
+                <div class="profile-editor-selected-heading">
+                    <h3>Selected Skills</h3>
+                    <span id="profile-editor-skill-count">0 selected</span>
+                </div>
+
+                <div id="selected-skills"
+                     class="profile-editor-skill-list">
+
+                    {% for field in form.skill_fields %}
+                        <div class="skill-option profile-editor-skill-row"
+                             data-skill="{{ field.html_name }}">
+
+                            <div class="profile-editor-skill-name">
+                                <span class="profile-editor-skill-initial">
+                                    {{ field.label|first|upper }}
+                                </span>
+
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+                            </div>
+
+                            <div class="profile-editor-skill-controls">
+                                {{ field }}
+
+                                <button type="button"
+                                        class="remove-skill-button profile-editor-remove-button"
+                                        aria-label="Remove {{ field.label }}">
+                                    Remove
+                                </button>
+                            </div>
+
+                            {% for error in field.errors %}
+                                <p class="field-error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <p id="profile-editor-no-skills"
+                   class="profile-editor-empty-skills">
+                    No skills selected yet. Choose one above to get started.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Save actions -->
+        <div class="profile-editor-actions">
+            <div class="profile-editor-actions-text">
+                <strong>Looking good!</strong>
+                <span>Your changes will appear on your student profile.</span>
+            </div>
+
+            <div class="profile-editor-action-buttons">
+                <a href="{% url 'profile' %}"
+                   class="profile-editor-cancel-button">
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="profile-editor-save-button">
+                    Save Changes →
+                </button>
+            </div>
         </div>
 
     </form>
 
-</section>
+</div>
 
 {% endblock %}
 
@@ -165,18 +300,26 @@
 document.addEventListener("DOMContentLoaded", function () {
     const picker = document.getElementById("skill-picker");
     const addButton = document.getElementById("add-skill-button");
-    const rows = document.querySelectorAll(".skill-option");
+    const rows = document.querySelectorAll(".profile-editor-skill-row");
+    const countLabel = document.getElementById("profile-editor-skill-count");
+    const emptyMessage = document.getElementById("profile-editor-no-skills");
 
     function refreshSkills() {
+        let selectedCount = 0;
+
         rows.forEach(function (row) {
             const select = row.querySelector("select");
             const selected = select.value !== "";
 
             row.hidden = !selected;
 
-            const option = picker.querySelector(
-                'option[value="' + row.dataset.skill + '"]'
-            );
+            if (selected) {
+                selectedCount++;
+            }
+
+            const option = Array.from(picker.options).find(function (item) {
+                return item.value === row.dataset.skill;
+            });
 
             if (option) {
                 option.hidden = selected;
@@ -184,6 +327,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        countLabel.textContent = selectedCount + " selected";
+        emptyMessage.hidden = selectedCount > 0;
         picker.value = "";
     }
 
@@ -194,13 +339,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const row = document.querySelector(
-            '.skill-option[data-skill="' + selectedSkill + '"]'
-        );
+        const row = Array.from(rows).find(function (item) {
+            return item.dataset.skill === selectedSkill;
+        });
 
         if (row) {
             row.querySelector("select").value = "1";
-            picker.value = "";
             refreshSkills();
         }
     });
