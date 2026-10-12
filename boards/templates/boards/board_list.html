@@ -5,67 +5,206 @@
 
 {% block content %}
 
-<div class="discover-page">
+<div class="classroom-hub-page">
 
-    <div class="discover-header">
-        <span class="eyebrow">YOUR CLASSROOM</span>
-        <h1>My Classes</h1>
-        <p>
-            Join your professor's class, connect with classmates,
-            and find your next team.
-        </p>
-    </div>
+    <!-- Classroom hero -->
+    <section class="classroom-hub-hero">
 
-    {% if not request.user.teacherprofile %}
-    <section style="margin-bottom: 32px;">
+        <div class="classroom-hub-hero-content">
+            <span class="classroom-hub-eyebrow">
+                ✦ YOUR ACADEMIC SPACE
+            </span>
 
-        <h2 class="section-title">Join a Class</h2>
+            <h1>
+                Your classroom.<br>
+                <span>Your community.</span>
+            </h1>
 
-        <div class="project-card">
             <p>
-                Enter the enrollment code your professor gave you
-                to join their class.
+                Stay connected with your classes, collaborate
+                with classmates, and turn classroom ideas
+                into something extraordinary.
             </p>
 
-            <form method="post" action="{% url 'join_class' %}">
-                {% csrf_token %}
+            <div class="classroom-hub-hero-badges">
+                <span>◈ Learn</span>
+                <span>✦ Connect</span>
+                <span>↗ Collaborate</span>
+            </div>
+        </div>
 
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div class="classroom-hub-hero-art" aria-hidden="true">
+            <div class="classroom-hub-orbit classroom-hub-orbit-one"></div>
+            <div class="classroom-hub-orbit classroom-hub-orbit-two"></div>
 
-                    <input
-                        type="text"
-                        name="enrollment_code"
-                        placeholder="Enter 8-character code"
-                        maxlength="8"
-                        required
-                        autocomplete="off"
-                        style="flex: 1; min-width: 180px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; text-transform: uppercase;"
-                    >
-
-                    <button
-                        type="submit"
-                        class="create-class-button"
-                        style="cursor: pointer; border: none;"
-                    >
-                        Join Class
-                    </button>
-
-                </div>
-            </form>
+            <div class="classroom-hub-art-center">▤</div>
+            <div class="classroom-hub-art-node classroom-hub-node-one">✦</div>
+            <div class="classroom-hub-art-node classroom-hub-node-two">◈</div>
+            <div class="classroom-hub-art-node classroom-hub-node-three">✓</div>
         </div>
 
     </section>
+
+    <!-- Overview -->
+    <section class="classroom-hub-overview">
+
+        <div class="classroom-hub-stat">
+            <div class="classroom-hub-stat-icon classroom-stat-blue">
+                ▤
+            </div>
+
+            <div>
+                <span>My Classes</span>
+                <strong>{{ my_classes|length }}</strong>
+            </div>
+        </div>
+
+        {% if not request.user.teacherprofile %}
+        <div class="classroom-hub-stat">
+            <div class="classroom-hub-stat-icon classroom-stat-teal">
+                ◈
+            </div>
+
+            <div>
+                <span>Class Teams</span>
+                <strong>{{ my_teams|length }}</strong>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="classroom-hub-stat">
+            <div class="classroom-hub-stat-icon classroom-stat-purple">
+                ✦
+            </div>
+
+            <div>
+                <span>Your Space</span>
+                <strong>UTRGV</strong>
+            </div>
+        </div>
+
+    </section>
+
+    {% if not request.user.teacherprofile %}
+
+    <!-- Enrollment section -->
+    <section class="classroom-hub-section">
+
+        <div class="classroom-hub-section-heading">
+            <div>
+                <span class="classroom-hub-section-eyebrow">
+                    GET CONNECTED
+                </span>
+
+                <h2>Join a Class</h2>
+
+                <p>
+                    Have a code from your professor?
+                    Enter it below to join your classroom.
+                </p>
+            </div>
+        </div>
+
+        <div class="classroom-hub-enrollment-card">
+
+            <div class="classroom-hub-enrollment-info">
+                <div class="classroom-hub-enrollment-icon">
+                    +
+                </div>
+
+                <div>
+                    <h3>Enter your enrollment code</h3>
+                    <p>
+                        Your professor will provide an
+                        8-character classroom code.
+                    </p>
+                </div>
+            </div>
+
+            <form method="post"
+                  action="{% url 'join_class' %}"
+                  class="classroom-hub-enrollment-form">
+                {% csrf_token %}
+
+                <label for="classroom-enrollment-code">
+                    Classroom Code
+                </label>
+
+                <div class="classroom-hub-enrollment-controls">
+
+                    <input
+                        type="text"
+                        id="classroom-enrollment-code"
+                        name="enrollment_code"
+                        placeholder="e.g. ABCD1234"
+                        maxlength="8"
+                        minlength="8"
+                        required
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+
+                    <button type="submit"
+                            class="classroom-hub-join-button">
+                        Join Class →
+                    </button>
+
+                </div>
+
+                <p class="classroom-hub-code-help">
+                    Codes are provided by your professor.
+                    Enter all 8 characters.
+                </p>
+
+            </form>
+
+        </div>
+
+    </section>
+
     {% endif %}
 
-    <section style="margin-bottom: 32px;">
+    <!-- Enrolled classes -->
+    <section class="classroom-hub-section">
 
-        <h2 class="section-title">Enrolled Classes</h2>
+        <div class="classroom-hub-section-heading">
+            <div>
+                <span class="classroom-hub-section-eyebrow">
+                    YOUR LEARNING SPACES
+                </span>
 
-        <div class="project-list">
+                <h2>Enrolled Classes</h2>
+
+                <p>
+                    Access classroom discussions, teams,
+                    and announcements.
+                </p>
+            </div>
+
+            <span class="classroom-hub-section-count">
+                {{ my_classes|length }} classes
+            </span>
+        </div>
+
+        <div class="classroom-hub-class-grid">
 
             {% for c in my_classes %}
 
-                <div class="project-card">
+                <article class="classroom-hub-class-card">
+
+                    <div class="classroom-hub-class-card-top">
+                        <div class="classroom-hub-course-icon">
+                            ▤
+                        </div>
+
+                        <span class="classroom-hub-course-badge">
+                            ENROLLED
+                        </span>
+                    </div>
+
+                    <span class="classroom-hub-course-label">
+                        CLASSROOM
+                    </span>
 
                     <h3>
                         <a href="{{ c.get_absolute_url }}">
@@ -73,25 +212,48 @@
                         </a>
                     </h3>
 
-                    <p>{{ c.description }}</p>
-
-                    <p class="meta">
-                        Professor: {{ c.teacher.username }}
+                    <p class="classroom-hub-course-description">
+                        {% if c.description %}
+                            {{ c.description|truncatewords:35 }}
+                        {% else %}
+                            Your classroom space for learning
+                            and collaborating with classmates.
+                        {% endif %}
                     </p>
 
-                    <a href="{{ c.get_absolute_url }}">
-                        View Class →
-                    </a>
+                    <div class="classroom-hub-class-card-bottom">
 
-                </div>
+                        <span class="classroom-hub-professor">
+                            Professor: {{ c.teacher.username }}
+                        </span>
+
+                        <a href="{{ c.get_absolute_url }}"
+                           class="classroom-hub-view-link">
+                            Open Class →
+                        </a>
+
+                    </div>
+
+                </article>
 
             {% empty %}
 
-                <div class="project-card">
-                    <p>
-                        You haven't joined any classes yet.
-                        Enter your professor's code above to get started.
-                    </p>
+                <div class="classroom-hub-empty-state">
+                    <div class="classroom-hub-empty-icon">▤</div>
+
+                    <h3>Your classroom journey starts here.</h3>
+
+                    {% if request.user.teacherprofile %}
+                        <p>
+                            No classes are listed here yet.
+                        </p>
+                    {% else %}
+                        <p>
+                            You haven't joined any classes yet.
+                            Enter your professor's enrollment code
+                            above to get started.
+                        </p>
+                    {% endif %}
                 </div>
 
             {% endfor %}
@@ -101,37 +263,75 @@
     </section>
 
     {% if not request.user.teacherprofile %}
-    <section>
 
-        <h2 class="section-title">My Class Teams</h2>
+    <!-- Class teams -->
+    <section class="classroom-hub-section">
 
-        <div class="project-list">
+        <div class="classroom-hub-section-heading">
+            <div>
+                <span class="classroom-hub-section-eyebrow">
+                    BETTER TOGETHER
+                </span>
+
+                <h2>My Class Teams</h2>
+
+                <p>
+                    Your teams within enrolled classes.
+                    Pick up where your collaboration left off.
+                </p>
+            </div>
+
+            <span class="classroom-hub-section-count">
+                {{ my_teams|length }} teams
+            </span>
+        </div>
+
+        <div class="classroom-hub-team-grid">
 
             {% for t in my_teams %}
 
-                <div class="project-card">
+                <article class="classroom-hub-team-card">
 
-                    <h3>
-                        <a href="{{ t.get_absolute_url }}">
-                            {{ t.name }}
-                        </a>
-                    </h3>
+                    <div class="classroom-hub-team-icon">
+                        ◈
+                    </div>
 
-                    <p class="meta">
-                        Class: {{ t.class_group.name }}
-                    </p>
+                    <div class="classroom-hub-team-content">
 
-                    <a href="{{ t.get_absolute_url }}">
+                        <span class="classroom-hub-team-label">
+                            CLASS TEAM
+                        </span>
+
+                        <h3>
+                            <a href="{{ t.get_absolute_url }}">
+                                {{ t.name }}
+                            </a>
+                        </h3>
+
+                        <p>
+                            {{ t.class_group.name }}
+                        </p>
+
+                    </div>
+
+                    <a href="{{ t.get_absolute_url }}"
+                       class="classroom-hub-team-link">
                         View Team →
                     </a>
 
-                </div>
+                </article>
 
             {% empty %}
 
-                <div class="project-card">
+                <div class="classroom-hub-empty-state">
+                    <div class="classroom-hub-empty-icon">◈</div>
+
+                    <h3>Great teams start with a connection.</h3>
+
                     <p>
                         You're not part of a class team yet.
+                        Your teams will appear here once
+                        you've joined one.
                     </p>
                 </div>
 
@@ -140,6 +340,7 @@
         </div>
 
     </section>
+
     {% endif %}
 
 </div>

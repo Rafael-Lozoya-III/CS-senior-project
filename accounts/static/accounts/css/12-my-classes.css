@@ -1,0 +1,659 @@
+
+/* ==========================================
+   TEAM MATCH - MY CLASSES LEARNING HUB
+   ========================================== */
+
+.classroom-hub-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 0 75px;
+    color: #26334c;
+}
+
+/* Hero */
+
+.classroom-hub-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    min-height: 310px;
+    padding: 48px 55px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(120deg, #102b48 0%, #174b65 58%, #147d82 100%);
+    color: #fff;
+}
+
+.classroom-hub-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 610px;
+}
+
+.classroom-hub-eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #a3e9dd;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.classroom-hub-hero h1 {
+    margin: 0 0 17px;
+    color: #fff;
+    font-size: clamp(34px, 5vw, 51px);
+    font-weight: 800;
+    letter-spacing: -1.7px;
+    line-height: 1.14;
+}
+
+.classroom-hub-hero h1 span {
+    color: #9fe6d8;
+}
+
+.classroom-hub-hero p {
+    max-width: 480px;
+    margin: 0;
+    color: #d0e3e9;
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.classroom-hub-hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.classroom-hub-hero-badges span {
+    padding: 9px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.19);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.09);
+    color: #e9ffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Academic illustration */
+
+.classroom-hub-hero-art {
+    position: relative;
+    flex: 0 0 245px;
+    height: 235px;
+}
+
+.classroom-hub-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px dashed rgba(203, 255, 246, 0.25);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.classroom-hub-orbit-one {
+    width: 185px;
+    height: 185px;
+}
+
+.classroom-hub-orbit-two {
+    width: 245px;
+    height: 245px;
+}
+
+.classroom-hub-art-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 95px;
+    height: 95px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 26px;
+    background: linear-gradient(135deg, #35a9a7, #69cbb4);
+    color: #fff;
+    font-size: 53px;
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.17);
+    transform: translate(-50%, -50%) rotate(-9deg);
+}
+
+.classroom-hub-art-node {
+    position: absolute;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.13);
+}
+
+.classroom-hub-node-one {
+    top: 0;
+    left: 35px;
+    background: #7d93e3;
+    transform: rotate(-10deg);
+}
+
+.classroom-hub-node-two {
+    top: 40px;
+    right: -5px;
+    background: #48b9a4;
+    transform: rotate(12deg);
+}
+
+.classroom-hub-node-three {
+    bottom: 4px;
+    left: 45px;
+    background: #edb37d;
+    transform: rotate(8deg);
+}
+
+/* Overview statistics */
+
+.classroom-hub-overview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 26px 0 48px;
+}
+
+.classroom-hub-stat {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-width: 0;
+    padding: 23px;
+    border: 1px solid #e6edf1;
+    border-radius: 17px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(20, 53, 70, 0.04);
+}
+
+.classroom-hub-stat-icon {
+    display: grid;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 14px;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.classroom-stat-blue {
+    background: #eaf1ff;
+    color: #4d7ac8;
+}
+
+.classroom-stat-teal {
+    background: #e5f7f3;
+    color: #239b8d;
+}
+
+.classroom-stat-purple {
+    background: #f1ecff;
+    color: #8161c7;
+}
+
+.classroom-hub-stat > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.classroom-hub-stat span {
+    color: #81909c;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.classroom-hub-stat strong {
+    color: #23384d;
+    font-size: 27px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+/* Section headings */
+
+.classroom-hub-section {
+    margin-top: 45px;
+}
+
+.classroom-hub-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.classroom-hub-section-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #218d89;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.classroom-hub-section-heading h2 {
+    margin: 0 0 8px;
+    color: #26374b;
+    font-size: 26px;
+    letter-spacing: -0.7px;
+}
+
+.classroom-hub-section-heading p {
+    margin: 0;
+    color: #83909e;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.classroom-hub-section-count {
+    padding: 9px 14px;
+    border-radius: 20px;
+    background: #e7f6f2;
+    color: #258d83;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* Enrollment panel */
+
+.classroom-hub-enrollment-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 32px;
+    align-items: center;
+    padding: 30px;
+    border: 1px solid #dcebe9;
+    border-radius: 19px;
+    background: linear-gradient(115deg, #f1faf8, #f5f9ff);
+}
+
+.classroom-hub-enrollment-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.classroom-hub-enrollment-icon {
+    display: grid;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 15px;
+    background: #d9f3ec;
+    color: #228d82;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.classroom-hub-enrollment-info h3 {
+    margin: 0 0 9px;
+    color: #2b4052;
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.classroom-hub-enrollment-info p {
+    margin: 0;
+    color: #82939c;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.classroom-hub-enrollment-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #344e5d;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.classroom-hub-enrollment-controls {
+    display: flex;
+    align-items: stretch;
+    gap: 11px;
+}
+
+.classroom-hub-enrollment-controls input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 14px;
+    border: 1px solid #cbdedc;
+    border-radius: 10px;
+    background: #fff;
+    color: #243e50;
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+
+.classroom-hub-enrollment-controls input:focus {
+    outline: none;
+    border-color: #36a99e;
+    box-shadow: 0 0 0 3px rgba(54, 169, 158, 0.13);
+}
+
+.classroom-hub-join-button {
+    flex-shrink: 0;
+    padding: 12px 19px;
+    border: none;
+    border-radius: 10px;
+    background: #168c85;
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.classroom-hub-join-button:hover {
+    background: #11766f;
+}
+
+.classroom-hub-code-help {
+    margin: 10px 0 0;
+    color: #87969f;
+    font-size: 11px;
+}
+
+/* Class cards */
+
+.classroom-hub-class-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.classroom-hub-class-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 26px;
+    border: 1px solid #e5ebf0;
+    border-radius: 19px;
+    background: #fff;
+    box-shadow: 0 6px 22px rgba(20, 50, 70, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.classroom-hub-class-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 32px rgba(24, 63, 78, 0.1);
+}
+
+.classroom-hub-class-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.classroom-hub-course-icon {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 14px;
+    background: #e8f2fa;
+    color: #467da9;
+    font-size: 29px;
+}
+
+.classroom-hub-course-badge {
+    padding: 8px 11px;
+    border-radius: 20px;
+    background: #e5f7ef;
+    color: #2c9874;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.classroom-hub-course-label {
+    margin-bottom: 9px;
+    color: #2c9994;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.classroom-hub-class-card h3 {
+    margin: 0 0 12px;
+    font-size: 21px;
+    line-height: 1.35;
+}
+
+.classroom-hub-class-card h3 a {
+    color: #283e53;
+    text-decoration: none;
+}
+
+.classroom-hub-class-card h3 a:hover {
+    color: #168c85;
+}
+
+.classroom-hub-course-description {
+    flex: 1;
+    margin: 0 0 25px;
+    color: #788895;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.classroom-hub-class-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 17px;
+    border-top: 1px solid #edf0f3;
+}
+
+.classroom-hub-professor {
+    color: #8996a2;
+    font-size: 12px;
+}
+
+.classroom-hub-view-link {
+    color: #168b85;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.classroom-hub-view-link:hover {
+    color: #0f6e69;
+    text-decoration: underline;
+}
+
+/* Class team cards */
+
+.classroom-hub-team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.classroom-hub-team-card {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-width: 0;
+    padding: 23px;
+    border: 1px solid #e4eaf0;
+    border-radius: 17px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(25, 55, 70, 0.035);
+}
+
+.classroom-hub-team-icon {
+    display: grid;
+    flex: 0 0 53px;
+    width: 53px;
+    height: 53px;
+    place-items: center;
+    border-radius: 15px;
+    background: #e7f7f4;
+    color: #23968c;
+    font-size: 27px;
+}
+
+.classroom-hub-team-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.classroom-hub-team-label {
+    color: #299a92;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.classroom-hub-team-content h3 {
+    margin: 6px 0;
+    font-size: 18px;
+}
+
+.classroom-hub-team-content h3 a {
+    color: #2d4255;
+    text-decoration: none;
+}
+
+.classroom-hub-team-content h3 a:hover {
+    color: #168c85;
+}
+
+.classroom-hub-team-content p {
+    margin: 0;
+    color: #8794a0;
+    font-size: 12px;
+}
+
+.classroom-hub-team-link {
+    flex-shrink: 0;
+    color: #168b85;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.classroom-hub-team-link:hover {
+    text-decoration: underline;
+}
+
+/* Empty states */
+
+.classroom-hub-empty-state {
+    grid-column: 1 / -1;
+    padding: 47px 25px;
+    border: 1px dashed #cbdeda;
+    border-radius: 19px;
+    background: #f8fcfb;
+    text-align: center;
+}
+
+.classroom-hub-empty-icon {
+    display: grid;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 19px;
+    place-items: center;
+    border-radius: 17px;
+    background: #e2f4f0;
+    color: #2c988b;
+    font-size: 30px;
+}
+
+.classroom-hub-empty-state h3 {
+    margin: 0 0 10px;
+    color: #304657;
+    font-size: 20px;
+}
+
+.classroom-hub-empty-state p {
+    max-width: 440px;
+    margin: 0 auto;
+    color: #83949e;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* Responsive */
+
+@media (max-width: 950px) {
+    .classroom-hub-hero {
+        padding: 38px;
+    }
+
+    .classroom-hub-hero-art {
+        flex-basis: 200px;
+        transform: scale(0.85);
+    }
+
+    .classroom-hub-enrollment-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 700px) {
+    .classroom-hub-hero {
+        padding: 32px 24px;
+    }
+
+    .classroom-hub-hero-art {
+        display: none;
+    }
+
+    .classroom-hub-overview,
+    .classroom-hub-class-grid,
+    .classroom-hub-team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .classroom-hub-enrollment-card {
+        padding: 22px;
+    }
+
+    .classroom-hub-enrollment-controls {
+        flex-direction: column;
+    }
+
+    .classroom-hub-join-button {
+        min-height: 44px;
+    }
+
+    .classroom-hub-team-card {
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .classroom-hub-class-card {
+        transition: none;
+    }
+}
