@@ -1,0 +1,520 @@
+
+/* ==========================================
+   TEAM MATCH - STUDENT PORTFOLIO
+   ========================================== */
+
+.portfolio-page {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 8px 0 70px;
+    color: #24263f;
+}
+
+/* Portfolio banner */
+
+.portfolio-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 275px;
+    padding: 45px 52px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(125deg, #171b3c 0%, #302659 55%, #49317c 100%);
+    color: #fff;
+}
+
+.portfolio-banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 590px;
+}
+
+.portfolio-eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #c5b4ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.portfolio-banner h1 {
+    margin: 0 0 18px;
+    color: #fff;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -1.5px;
+}
+
+.portfolio-banner h1 span {
+    color: #b7a2ff;
+}
+
+.portfolio-banner p {
+    max-width: 450px;
+    margin: 0;
+    color: #d0cbe6;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.portfolio-banner-decoration {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.portfolio-decoration-one {
+    width: 340px;
+    height: 340px;
+    right: -65px;
+    top: -145px;
+}
+
+.portfolio-decoration-two {
+    width: 250px;
+    height: 250px;
+    right: 65px;
+    bottom: -180px;
+}
+
+.portfolio-banner-symbol {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    flex: 0 0 130px;
+    width: 130px;
+    height: 130px;
+    place-items: center;
+    margin-right: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 35px;
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.13);
+    transform: rotate(-12deg);
+}
+
+.portfolio-banner-symbol span {
+    color: #d5c5ff;
+    font-size: 72px;
+    transform: rotate(12deg);
+}
+
+/* Identity card */
+
+.portfolio-identity-card {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: -30px 25px 32px;
+    padding: 24px 30px;
+    border: 1px solid #e8e8f1;
+    border-radius: 19px;
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(25, 25, 65, 0.07);
+}
+
+.portfolio-identity-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+}
+
+.portfolio-avatar {
+    display: flex;
+    flex: 0 0 74px;
+    align-items: center;
+    justify-content: center;
+    width: 74px;
+    height: 74px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #8e6be7, #617bdf);
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(101, 93, 210, 0.2);
+}
+
+.portfolio-identity-details {
+    min-width: 0;
+}
+
+.portfolio-student-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #8970c6;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.portfolio-identity-details h2 {
+    margin: 0 0 7px;
+    color: #232540;
+    font-size: 25px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.portfolio-identity-details p {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0;
+    color: #7a7e93;
+    font-size: 13px;
+}
+
+.portfolio-status-dot {
+    display: inline-block;
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #56bf96;
+}
+
+.portfolio-edit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 11px 19px;
+    border-radius: 10px;
+    background: #7052d0;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.portfolio-edit-button:hover {
+    background: #583eb8;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* Portfolio layout */
+
+.portfolio-content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr);
+    align-items: start;
+    gap: 23px;
+}
+
+.portfolio-main-column,
+.portfolio-side-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 23px;
+}
+
+/* Panels */
+
+.portfolio-panel {
+    min-width: 0;
+    padding: 29px;
+    border: 1px solid #e8e9f2;
+    border-radius: 19px;
+    background: #fff;
+    box-shadow: 0 5px 22px rgba(30, 32, 75, 0.035);
+}
+
+.portfolio-panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 23px;
+}
+
+.portfolio-panel-icon {
+    display: grid;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border-radius: 13px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.portfolio-icon-purple {
+    background: #f0eaff;
+    color: #8259d8;
+}
+
+.portfolio-icon-blue {
+    background: #e9f0ff;
+    color: #527bd5;
+}
+
+.portfolio-icon-pink {
+    background: #ffedf4;
+    color: #d46b9a;
+}
+
+.portfolio-panel-eyebrow {
+    display: block;
+    margin-bottom: 5px;
+    color: #9586bb;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.portfolio-panel-heading h3 {
+    margin: 0;
+    color: #272944;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+/* About section */
+
+.portfolio-about-text {
+    margin: 0;
+    color: #696e84;
+    font-size: 14px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+/* Skills */
+
+.portfolio-skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.portfolio-skill-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px;
+    border: 1px solid #eeeef5;
+    border-radius: 13px;
+    background: #fcfcff;
+}
+
+.portfolio-skill-symbol {
+    display: grid;
+    flex: 0 0 39px;
+    width: 39px;
+    height: 39px;
+    place-items: center;
+    border-radius: 11px;
+    background: #ede8ff;
+    color: #7455c6;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.portfolio-skill-details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.portfolio-skill-details strong {
+    color: #32344f;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.portfolio-skill-details span {
+    color: #9b9dae;
+    font-size: 11px;
+}
+
+.portfolio-skill-level {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    border-radius: 20px;
+    background: #eaf5ef;
+    color: #3c9470;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Interests */
+
+.portfolio-interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.portfolio-interest-pill {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 9px 13px;
+    border: 1px solid #e8e0f8;
+    border-radius: 25px;
+    background: #f7f3ff;
+    color: #7558ba;
+    font-size: 12px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* Empty messages */
+
+.portfolio-empty-message {
+    width: 100%;
+    padding: 20px;
+    border: 1px dashed #dfd8f3;
+    border-radius: 13px;
+    background: #fbfaff;
+}
+
+.portfolio-empty-message p {
+    margin: 0 0 12px;
+    color: #878a9c;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.portfolio-empty-message a {
+    color: #7454c9;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.portfolio-empty-message a:hover {
+    text-decoration: underline;
+}
+
+/* Discover CTA */
+
+.portfolio-cta-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+    border-radius: 19px;
+    background: linear-gradient(145deg, #eeeaff, #e9f2ff);
+    border: 1px solid #e4defb;
+}
+
+.portfolio-cta-symbol {
+    display: grid;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 18px;
+    place-items: center;
+    border-radius: 13px;
+    background: #fff;
+    color: #805cdb;
+    font-size: 25px;
+}
+
+.portfolio-cta-panel h3 {
+    margin: 0 0 12px;
+    color: #292747;
+    font-size: 21px;
+    line-height: 1.35;
+}
+
+.portfolio-cta-panel p {
+    margin: 0 0 22px;
+    color: #72758f;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.portfolio-discover-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 41px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    background: #7052d0;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.portfolio-discover-button:hover {
+    background: #593db9;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+    .portfolio-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-banner-symbol {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .portfolio-banner {
+        min-height: 240px;
+        padding: 32px 25px;
+    }
+
+    .portfolio-banner-symbol {
+        display: none;
+    }
+
+    .portfolio-identity-card {
+        margin: -20px 12px 25px;
+        padding: 20px;
+    }
+
+    .portfolio-identity-left {
+        gap: 13px;
+    }
+
+    .portfolio-avatar {
+        flex-basis: 58px;
+        width: 58px;
+        height: 58px;
+        font-size: 20px;
+    }
+
+    .portfolio-identity-details h2 {
+        font-size: 20px;
+    }
+
+    .portfolio-panel {
+        padding: 22px;
+    }
+
+    .portfolio-skill-item {
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portfolio-edit-button {
+        transition: none;
+    }
+}

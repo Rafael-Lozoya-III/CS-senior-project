@@ -1,97 +1,249 @@
+
 {% extends "base.html" %}
 
 {% block title %}My Profile - Team Match{% endblock %}
 
 {% block content %}
 
-<div class="student-profile-page">
+<div class="portfolio-page">
 
-    <div class="student-profile-title">
-        <span class="profile-eyebrow">STUDENT PROFILE</span>
-        <h1 class="page-title">My Profile</h1>
-        <p class="page-subtitle">
-            Your skills, interests, and experience.
-        </p>
-    </div>
+    <!-- Profile banner -->
+    <section class="portfolio-banner">
 
-    <section class="profile-card student-profile-card">
+        <div class="portfolio-banner-decoration portfolio-decoration-one"></div>
+        <div class="portfolio-banner-decoration portfolio-decoration-two"></div>
 
-        <div class="profile-header">
-            <div class="profile-person">
+        <div class="portfolio-banner-content">
+            <span class="portfolio-eyebrow">
+                ✦ MY STUDENT PORTFOLIO
+            </span>
 
-                <div class="avatar">
-                    {{ student_profile.user.first_name|first }}
-                    {{ student_profile.user.last_name|first }}
-                </div>
+            <h1>More than a name.<br>
+                <span>Here's my story.</span>
+            </h1>
 
-                <div>
-                    <h2 class="profile-name">
-                        {{ student_profile.user.get_full_name }}
-                    </h2>
-
-                    <p class="profile-grade">
-                        {{ student_profile.get_grade_level_display }}
-                        · UTRGV Student
-                    </p>
-                </div>
-
-            </div>
-
-            <a class="edit-button" href="{% url 'edit_profile' %}">
-                Edit Profile
-            </a>
+            <p>
+                A little about who I am, what I know,
+                and what I love to work on.
+            </p>
         </div>
 
-        <div class="profile-section">
-            <h3>About Me</h3>
-
-            {% if student_profile.experience %}
-                <p>{{ student_profile.experience }}</p>
-            {% else %}
-                <p class="profile-placeholder">
-                    No experience added yet.
-                    Use Edit Profile to tell others about yourself.
-                </p>
-            {% endif %}
-        </div>
-
-        <div class="profile-section">
-            <h3>Interests</h3>
-
-            <div class="tags">
-                {% for interest in student_profile.interests.all %}
-                    <span class="tag">
-                        {{ interest.name }}
-                    </span>
-                {% empty %}
-                    <p class="profile-placeholder">
-                        No interests added yet.
-                    </p>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="profile-section">
-            <h3>Skills</h3>
-
-            <div class="tags">
-                {% for student_skill in student_profile.studentskill_set.all %}
-                    <span class="tag skill-tag">
-                        <strong>{{ student_skill.skill.name }}</strong>
-
-                        <span class="skill-level">
-                            {{ student_skill.get_level_display }}
-                        </span>
-                    </span>
-                {% empty %}
-                    <p class="profile-placeholder">
-                        No skills added yet.
-                    </p>
-                {% endfor %}
-            </div>
+        <div class="portfolio-banner-symbol" aria-hidden="true">
+            <span>✦</span>
         </div>
 
     </section>
+
+    <!-- Identity card -->
+    <section class="portfolio-identity-card">
+
+        <div class="portfolio-identity-left">
+
+            <div class="portfolio-avatar">
+                {% if student_profile.user.first_name %}
+                    {{ student_profile.user.first_name|first|upper }}
+                {% endif %}
+                {% if student_profile.user.last_name %}
+                    {{ student_profile.user.last_name|first|upper }}
+                {% endif %}
+                {% if not student_profile.user.first_name and not student_profile.user.last_name %}
+                    {{ student_profile.user.username|first|upper }}
+                {% endif %}
+            </div>
+
+            <div class="portfolio-identity-details">
+                <span class="portfolio-student-label">
+                    STUDENT PROFILE
+                </span>
+
+                <h2>
+                    {% if student_profile.user.get_full_name %}
+                        {{ student_profile.user.get_full_name }}
+                    {% else %}
+                        {{ student_profile.user.username }}
+                    {% endif %}
+                </h2>
+
+                <p>
+                    <span class="portfolio-status-dot"></span>
+                    {{ student_profile.get_grade_level_display }}
+                    · UTRGV Student
+                </p>
+            </div>
+
+        </div>
+
+        <a href="{% url 'edit_profile' %}"
+           class="portfolio-edit-button">
+            ✎ Edit Profile
+        </a>
+
+    </section>
+
+    <!-- Portfolio content -->
+    <div class="portfolio-content-grid">
+
+        <!-- Main column -->
+        <div class="portfolio-main-column">
+
+            <section class="portfolio-panel portfolio-about-panel">
+
+                <div class="portfolio-panel-heading">
+                    <div class="portfolio-panel-icon portfolio-icon-purple">
+                        ✦
+                    </div>
+
+                    <div>
+                        <span class="portfolio-panel-eyebrow">
+                            GET TO KNOW ME
+                        </span>
+                        <h3>About Me</h3>
+                    </div>
+                </div>
+
+                {% if student_profile.experience %}
+                    <p class="portfolio-about-text">
+                        {{ student_profile.experience|linebreaksbr }}
+                    </p>
+                {% else %}
+                    <div class="portfolio-empty-message">
+                        <p>
+                            Your story starts here. Add your experience,
+                            background, or the kind of projects
+                            you enjoy working on.
+                        </p>
+
+                        <a href="{% url 'edit_profile' %}">
+                            Add your experience →
+                        </a>
+                    </div>
+                {% endif %}
+
+            </section>
+
+            <section class="portfolio-panel">
+
+                <div class="portfolio-panel-heading">
+                    <div class="portfolio-panel-icon portfolio-icon-blue">
+                        ◈
+                    </div>
+
+                    <div>
+                        <span class="portfolio-panel-eyebrow">
+                            WHAT I BRING TO THE TABLE
+                        </span>
+                        <h3>My Skills</h3>
+                    </div>
+                </div>
+
+                <div class="portfolio-skills-list">
+
+                    {% for student_skill in student_profile.studentskill_set.all %}
+
+                        <div class="portfolio-skill-item">
+                            <div class="portfolio-skill-symbol">
+                                {{ student_skill.skill.name|first|upper }}
+                            </div>
+
+                            <div class="portfolio-skill-details">
+                                <strong>
+                                    {{ student_skill.skill.name }}
+                                </strong>
+
+                                <span>
+                                    Skill & expertise
+                                </span>
+                            </div>
+
+                            <span class="portfolio-skill-level">
+                                {{ student_skill.get_level_display }}
+                            </span>
+                        </div>
+
+                    {% empty %}
+
+                        <div class="portfolio-empty-message">
+                            <p>
+                                No skills added yet. Add your strengths
+                                so other students know what you can contribute.
+                            </p>
+
+                            <a href="{% url 'edit_profile' %}">
+                                Add skills →
+                            </a>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="portfolio-side-column">
+
+            <section class="portfolio-panel">
+
+                <div class="portfolio-panel-heading">
+                    <div class="portfolio-panel-icon portfolio-icon-pink">
+                        ♡
+                    </div>
+
+                    <div>
+                        <span class="portfolio-panel-eyebrow">
+                            THINGS THAT INSPIRE ME
+                        </span>
+                        <h3>My Interests</h3>
+                    </div>
+                </div>
+
+                <div class="portfolio-interests-list">
+
+                    {% for interest in student_profile.interests.all %}
+                        <span class="portfolio-interest-pill">
+                            ✧ {{ interest.name }}
+                        </span>
+                    {% empty %}
+                        <div class="portfolio-empty-message">
+                            <p>
+                                No interests added yet.
+                                Let others know what excites you.
+                            </p>
+
+                            <a href="{% url 'edit_profile' %}">
+                                Add interests →
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+            <section class="portfolio-cta-panel">
+
+                <span class="portfolio-cta-symbol">✦</span>
+
+                <h3>Great things happen together.</h3>
+
+                <p>
+                    Find people who share your interests
+                    and start building something amazing.
+                </p>
+
+                <a href="{% url 'discover' %}"
+                   class="portfolio-discover-button">
+                    Explore Projects →
+                </a>
+
+            </section>
+
+        </aside>
+
+    </div>
+
 </div>
 
 {% endblock %}
