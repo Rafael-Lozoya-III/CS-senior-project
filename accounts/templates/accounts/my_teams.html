@@ -5,101 +5,238 @@
 
 {% block content %}
 
-<div class="discover-header">
-    <h1>My Teams</h1>
-    <p>Manage the projects you've created or joined.</p>
+<div class="my-teams-page">
+
+    <!-- Dashboard header -->
+    <section class="teams-hero">
+        <div class="teams-hero-content">
+            <span class="teams-eyebrow">
+                ✦ YOUR COLLABORATION SPACE
+            </span>
+
+            <h1>My Teams<span class="teams-title-dot">.</span></h1>
+
+            <p>
+                Your ideas, your teammates, your next big project.
+                Everything you're working on, all in one place.
+            </p>
+
+            <div class="teams-hero-actions">
+                <a href="{% url 'create_project' %}"
+                   class="teams-primary-button">
+                    + Create a Project
+                </a>
+
+                <a href="{% url 'discover' %}"
+                   class="teams-secondary-button">
+                    Explore Projects →
+                </a>
+            </div>
+        </div>
+
+        <div class="teams-hero-art" aria-hidden="true">
+            <div class="teams-art-ring teams-art-ring-one"></div>
+            <div class="teams-art-ring teams-art-ring-two"></div>
+
+            <div class="teams-art-center">
+                <span>✦</span>
+            </div>
+
+            <div class="teams-art-node teams-art-node-one">A</div>
+            <div class="teams-art-node teams-art-node-two">B</div>
+            <div class="teams-art-node teams-art-node-three">C</div>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="teams-stats">
+        <div class="teams-stat-card">
+            <div class="teams-stat-icon teams-stat-purple">✦</div>
+            <div>
+                <span class="teams-stat-label">Projects Created</span>
+                <strong>{{ created_projects|length }}</strong>
+            </div>
+        </div>
+
+        <div class="teams-stat-card">
+            <div class="teams-stat-icon teams-stat-blue">◈</div>
+            <div>
+                <span class="teams-stat-label">Projects Joined</span>
+                <strong>{{ joined_projects|length }}</strong>
+            </div>
+        </div>
+
+        <div class="teams-stat-card">
+            <div class="teams-stat-icon teams-stat-green">↗</div>
+            <div>
+                <span class="teams-stat-label">Total Projects</span>
+                <strong>
+                    {{ created_projects.count|add:joined_projects.count }}
+                </strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- Created projects -->
+    <section class="teams-section">
+
+        <div class="teams-section-heading">
+            <div>
+                <span class="teams-section-eyebrow">YOUR IDEAS</span>
+                <h2>Projects I Created</h2>
+                <p>
+                    Projects you're leading and building with others.
+                </p>
+            </div>
+
+            <span class="teams-section-count">
+                {{ created_projects|length }} projects
+            </span>
+        </div>
+
+        <div class="teams-project-grid">
+
+            {% for project in created_projects %}
+
+                <article class="teams-project-card">
+                    <div class="teams-project-card-top">
+                        <span class="teams-project-role teams-role-creator">
+                            ✦ Project Creator
+                        </span>
+
+                        <span class="teams-project-capacity">
+                            Up to {{ project.max_members }} members
+                        </span>
+                    </div>
+
+                    <span class="teams-project-course">
+                        {% if project.class_group %}
+                            {{ project.class_group.name }}
+                        {% else %}
+                            Independent Project
+                        {% endif %}
+                    </span>
+
+                    <h3>{{ project.title }}</h3>
+
+                    <p class="teams-project-description">
+                        {{ project.description|truncatewords:35 }}
+                    </p>
+
+                    <div class="teams-project-card-bottom">
+                        <span class="teams-project-meta">
+                            You're the project owner
+                        </span>
+
+                        <a href="{% url 'project_detail' project.id %}"
+                           class="teams-project-link">
+                            Manage Project →
+                        </a>
+                    </div>
+                </article>
+
+            {% empty %}
+
+                <div class="teams-empty-state">
+                    <div class="teams-empty-icon">✦</div>
+                    <h3>Every great idea starts somewhere.</h3>
+                    <p>
+                        You haven't created a project yet.
+                        Share an idea and start building your team.
+                    </p>
+
+                    <a href="{% url 'create_project' %}"
+                       class="teams-primary-button">
+                        Create Your First Project →
+                    </a>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- Joined projects -->
+    <section class="teams-section">
+
+        <div class="teams-section-heading">
+            <div>
+                <span class="teams-section-eyebrow">YOUR COLLABORATIONS</span>
+                <h2>Projects I Joined</h2>
+                <p>
+                    Teams you've joined and projects you're contributing to.
+                </p>
+            </div>
+
+            <span class="teams-section-count">
+                {{ joined_projects|length }} projects
+            </span>
+        </div>
+
+        <div class="teams-project-grid">
+
+            {% for project in joined_projects %}
+
+                <article class="teams-project-card">
+                    <div class="teams-project-card-top">
+                        <span class="teams-project-role teams-role-member">
+                            ◈ Team Member
+                        </span>
+
+                        <span class="teams-project-capacity">
+                            Up to {{ project.max_members }} members
+                        </span>
+                    </div>
+
+                    <span class="teams-project-course">
+                        {% if project.class_group %}
+                            {{ project.class_group.name }}
+                        {% else %}
+                            Independent Project
+                        {% endif %}
+                    </span>
+
+                    <h3>{{ project.title }}</h3>
+
+                    <p class="teams-project-description">
+                        {{ project.description|truncatewords:35 }}
+                    </p>
+
+                    <div class="teams-project-card-bottom">
+                        <span class="teams-project-meta">
+                            Created by {{ project.creator.username }}
+                        </span>
+
+                        <a href="{% url 'project_detail' project.id %}"
+                           class="teams-project-link">
+                            View Team →
+                        </a>
+                    </div>
+                </article>
+
+            {% empty %}
+
+                <div class="teams-empty-state">
+                    <div class="teams-empty-icon">◈</div>
+                    <h3>Your next collaboration is waiting.</h3>
+                    <p>
+                        You haven't joined a project yet.
+                        Explore ideas from other students and find your fit.
+                    </p>
+
+                    <a href="{% url 'discover' %}"
+                       class="teams-primary-button">
+                        Discover Projects →
+                    </a>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
 </div>
-
-<section>
-    <h2 class="section-title">Projects I Created</h2>
-
-    <div class="project-list">
-        {% for project in created_projects %}
-            <div class="project-card">
-
-                <div class="project-card-header">
-                    <div>
-                        <p class="project-course">
-                            {% if project.class_group %}
-                                {{ project.class_group.name }}
-                            {% else %}
-                                Independent Project
-                            {% endif %}
-                        </p>
-
-                        <h2>{{ project.title }}</h2>
-                    </div>
-
-                    <span class="tag">Creator</span>
-                </div>
-
-                <p class="project-description">
-                    {{ project.description|truncatewords:35 }}
-                </p>
-
-                <div class="project-footer">
-                    <a href="{% url 'project_detail' project.id %}"
-                       class="project-link">
-                        View Project →
-                    </a>
-                </div>
-
-            </div>
-        {% empty %}
-            <div class="no-results">
-                <p>You haven't created any projects yet.</p>
-                <a href="{% url 'create_project' %}">
-                    Create a Project
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-</section>
-
-<section style="margin-top: 40px;">
-    <h2 class="section-title">Projects I Joined</h2>
-
-    <div class="project-list">
-        {% for project in joined_projects %}
-            <div class="project-card">
-
-                <div class="project-card-header">
-                    <div>
-                        <p class="project-course">
-                            {% if project.class_group %}
-                                {{ project.class_group.name }}
-                            {% else %}
-                                Independent Project
-                            {% endif %}
-                        </p>
-
-                        <h2>{{ project.title }}</h2>
-                    </div>
-
-                    <span class="tag">Member</span>
-                </div>
-
-                <p class="project-description">
-                    {{ project.description|truncatewords:35 }}
-                </p>
-
-                <div class="project-footer">
-                    <a href="{% url 'project_detail' project.id %}"
-                       class="project-link">
-                        View Project →
-                    </a>
-                </div>
-
-            </div>
-        {% empty %}
-            <div class="no-results">
-                <p>You haven't joined any projects yet.</p>
-                <a href="{% url 'discover' %}">
-                    Discover Projects
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-</section>
 
 {% endblock %}
