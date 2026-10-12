@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -27,19 +28,27 @@
                 <div class="nav-links">
                     {% if request.user.teacherprofile %}
                         <a href="{% url 'professor_classes' %}"
-                        class="{% if request.resolver_match.url_name == 'professor_classes' %}active{% endif %}">
+                           class="{% if request.resolver_match.url_name == 'professor_classes' %}active{% endif %}">
                             My Classes
                         </a>
                     {% else %}
                         <a href="{% url 'discover' %}"
-                        class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
+                           class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
                             Discover
                         </a>
 
-                        <a href="#">My Teams</a>
+                        <a href="{% url 'board_list' %}"
+                           class="{% if request.resolver_match.url_name == 'board_list' or request.resolver_match.url_name == 'class_detail' or request.resolver_match.url_name == 'team_detail' %}active{% endif %}">
+                            My Classes
+                        </a>
+
+                        <a href="{% url 'my_teams' %}"
+                           class="{% if request.resolver_match.url_name == 'my_teams' %}active{% endif %}">
+                            My Teams
+                        </a>
 
                         <a href="{% url 'profile' %}"
-                        class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                           class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
                             Profile
                         </a>
                     {% endif %}
@@ -61,6 +70,16 @@
 
         </div>
     </nav>
+
+    {% if messages %}
+        <div class="site-messages">
+            {% for message in messages %}
+                <div class="site-message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <main class="page-container {% block main_class %}{% endblock %}">
         {% block content %}

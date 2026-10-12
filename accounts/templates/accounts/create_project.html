@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Create Project - Team Match{% endblock %}
+
+{% block content %}
+
+<div class="create-project-page">
+
+    <a href="{% url 'discover' %}" class="back-link">
+        &larr; Back to Discovery
+    </a>
+
+    <section class="create-project-card">
+
+        <h1 class="page-title">Create a Project</h1>
+
+        <p class="page-subtitle">
+            Share your project idea and start building a team.
+        </p>
+
+        <form method="post" class="create-project-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="project-form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.errors %}
+                        <div class="form-errors">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+            {% endfor %}
+
+            <div class="project-form-actions">
+                <a href="{% url 'discover' %}" class="project-cancel-button">
+                    Cancel
+                </a>
+
+                <button type="submit" class="create-project-button">
+                    Create Project
+                </button>
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+{% endblock %}

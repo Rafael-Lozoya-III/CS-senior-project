@@ -15,7 +15,13 @@
                 Explore projects, discover new ideas, and find
                 teammates who share your interests.
             </p>
-        </div>
+            </div>
+
+            <a href="{% url 'create_project' %}" class="create-project-button">
+                + Create Project
+            </a>
+
+            </div>
 
 <div class="discover-tools">
 
@@ -52,14 +58,17 @@
                 <div class="project-card-header">
                     <div>
                         <span class="project-category">
-                            {{ project.course }}
+                            {% if project.class_group %}
+                                {{ project.class_group.name }}
+                            {% else %}
+                                Independent Project
+                            {% endif %}
                         </span>
                         <h2>{{ project.title }}</h2>
                     </div>
 
                     <span class="member-count">
-                        {{ project.members|length }}/{{ project.max_members }}
-                        members
+                        Max {{ project.max_members }} members
                     </span>
                 </div>
 
@@ -68,15 +77,14 @@
                 </p>
 
                 <div class="tags">
-                    {% for skill in project.skills %}
-                        <span class="tag">{{ skill }}</span>
-                    {% endfor %}
+                    <span class="tag">
+                        Created by {{ project.creator.username }}
+                    </span>
                 </div>
 
                 <div class="project-footer">
                     <span class="project-availability">
-                        {{ project.members|length }} of
-                        {{ project.max_members }} spots filled
+                        Team size: up to {{ project.max_members }}
                     </span>
 
                     <a href="{% url 'project_detail' project.id %}"

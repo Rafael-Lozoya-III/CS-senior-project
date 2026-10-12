@@ -1,7 +1,24 @@
+
+import secrets
+import string
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.text import slugify
+
+
+def generate_class_code():
+    """Generate a unique 8-character class enrollment code."""
+    characters = string.ascii_uppercase + string.digits
+
+    while True:
+        code = ''.join(
+            secrets.choice(characters) for _ in range(8)
+        )
+
+        if not Class.objects.filter(enrollment_code=code).exists():
+            return code
 
 
 class Class(models.Model):
@@ -9,12 +26,23 @@ class Class(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(blank=True)
+
     teacher = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='taught_classes'
     )
+
     members = models.ManyToManyField(
         User, related_name='enrolled_classes', blank=True
     )
+
+    enrollment_code = models.CharField(
+        max_length=8,
+        unique=True,
+        null=True,
+        blank=True,
+        editable=False
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -24,6 +52,10 @@ class Class(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        if not self.enrollment_code:
+            self.enrollment_code = generate_class_code()
+
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -37,10 +69,15 @@ class Team(models.Model):
     """A team within a class."""
     name = models.CharField(max_length=200)
     slug = models.SlugField(blank=True)
+
     class_group = models.ForeignKey(
         Class, on_delete=models.CASCADE, related_name='teams'
     )
-    members = models.ManyToManyField(User, related_name='teams', blank=True)
+
+    members = models.ManyToManyField(
+        User, related_name='teams', blank=True
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -64,19 +101,24 @@ class Thread(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField(blank=True)
     body = models.TextField()
+
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='threads'
     )
+
     class_group = models.ForeignKey(
         Class, on_delete=models.CASCADE,
         related_name='threads', null=True, blank=True
     )
+
     team = models.ForeignKey(
         Team, on_delete=models.CASCADE,
         related_name='threads', null=True, blank=True
     )
+
     is_pinned = models.BooleanField(default=False)
     is_locked = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -88,10 +130,13 @@ class Thread(models.Model):
             base = slugify(self.title)[:50]
             slug = base
             n = 1
+
             while Thread.objects.filter(slug=slug).exists():
                 slug = f"{base}-{n}"
                 n += 1
+
             self.slug = slug
+
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -115,14 +160,18 @@ class Post(models.Model):
     thread = models.ForeignKey(
         Thread, on_delete=models.CASCADE, related_name='posts'
     )
+
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts'
     )
+
     body = models.TextField()
+
     parent = models.ForeignKey(
         'self', on_delete=models.CASCADE,
         null=True, blank=True, related_name='replies'
     )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

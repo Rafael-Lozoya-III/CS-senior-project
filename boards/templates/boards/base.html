@@ -1,76 +1,184 @@
+
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>{% block title %}Discussion Board{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}My Classes - Team Match{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+
     <style>
-        body { font-family: system-ui, sans-serif; max-width: 900px;
-               margin: 2rem auto; padding: 0 1rem; color: #222; }
-        nav { border-bottom: 2px solid #eee; padding-bottom: 1rem;
-              margin-bottom: 2rem; display: flex; justify-content: space-between; }
-        nav a { margin-right: 1rem; text-decoration: none; color: #0366d6; }
-        .card { border: 1px solid #e1e4e8; border-radius: 8px;
-                padding: 1rem; margin-bottom: 1rem; }
-        .card h3 { margin-top: 0; }
-        .meta { color: #666; font-size: 0.85rem; }
-        .thread-row { display: flex; justify-content: space-between;
-                      padding: 0.75rem 0; border-bottom: 1px solid #eee; }
-        .btn { background: #0366d6; color: white; padding: 0.5rem 1rem;
-               border-radius: 6px; text-decoration: none; border: none;
-               cursor: pointer; display: inline-block; }
-        .btn-secondary { background: #6c757d; }
-        .post { border-left: 3px solid #0366d6; padding-left: 1rem;
-                margin: 1rem 0; }
-        .reply { margin-left: 2rem; border-left: 3px solid #ccc; }
-        .form-control { width: 100%; padding: 0.5rem; border: 1px solid #ccc;
-                        border-radius: 6px; font-family: inherit;
-                        box-sizing: border-box; }
-        .messages { list-style: none; padding: 0; }
-        .messages li { padding: 0.5rem; background: #fff3cd;
-                       border-radius: 6px; margin-bottom: 0.5rem; }
-        .badge { background: #e1e4e8; border-radius: 12px;
-                 padding: 2px 8px; font-size: 0.75rem; }
+        .board-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem 3rem;
+            color: #222;
+        }
+
+        .board-container .card {
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #fff;
+        }
+
+        .board-container .card h3 {
+            margin-top: 0;
+        }
+
+        .board-container .meta {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .board-container .thread-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .board-container .btn {
+            background: #0366d6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .board-container .btn-secondary {
+            background: #6c757d;
+        }
+
+        .board-container .post {
+            border-left: 3px solid #0366d6;
+            padding-left: 1rem;
+            margin: 1rem 0;
+        }
+
+        .board-container .reply {
+            margin-left: 2rem;
+            border-left: 3px solid #ccc;
+        }
+
+        .board-container .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .board-container .badge {
+            background: #e1e4e8;
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+        }
+
+        .board-back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
     </style>
 </head>
+
 <body>
-<nav>
-    <div>
-        {% if user.is_authenticated %}
-            {% if user.teacherprofile %}
-        {% block professor_back_link %}
-            <a href="{% url 'professor_classes' %}">
-                <strong>← Back to My Classes</strong>
-            </a>
-        {% endblock %}
+
+    <nav class="navbar">
+        <div class="nav-container {% if not request.user.is_authenticated %}logged-out-nav{% endif %}">
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'home' %}" class="logo-link">
+                    Team Match
+                </a>
+
+                <div class="nav-links">
+                    {% if request.user.teacherprofile %}
+                        <a href="{% url 'professor_classes' %}"
+                           class="{% if request.resolver_match.url_name == 'professor_classes' or request.resolver_match.url_name == 'class_detail' or request.resolver_match.url_name == 'team_detail' %}active{% endif %}">
+                            My Classes
+                        </a>
+                    {% else %}
+                        <a href="{% url 'discover' %}"
+                           class="{% if request.resolver_match.url_name == 'discover' %}active{% endif %}">
+                            Discover
+                        </a>
+
+                        <a href="{% url 'board_list' %}"
+                           class="{% if request.resolver_match.url_name == 'board_list' or request.resolver_match.url_name == 'class_detail' or request.resolver_match.url_name == 'team_detail' %}active{% endif %}">
+                            My Classes
+                        </a>
+
+                        <a href="{% url 'my_teams' %}"
+                           class="{% if request.resolver_match.url_name == 'my_teams' %}active{% endif %}">
+                            My Teams
+                        </a>
+
+                        <a href="{% url 'profile' %}"
+                           class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                            Profile
+                        </a>
+                    {% endif %}
+
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+
             {% else %}
-                <a href="{% url 'board_list' %}">
-                    <strong>Discussion Boards</strong>
+                <a href="{% url 'login' %}" class="logo-link auth-logo">
+                    Team Match
                 </a>
             {% endif %}
-        {% else %}
-            <a href="{% url 'login' %}">
-                <strong>Team Match</strong>
-            </a>
-        {% endif %}
-    </div>
-    <div>
-        {% if user.is_authenticated %}
-            {{ user.username }} |
-            <form method="post" action="{% url 'logout' %}" style="display:inline">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-secondary">Logout</button>
-            </form>
-        {% else %}
-            <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-    </div>
-</nav>
 
-{% if messages %}
-<ul class="messages">
-    {% for m in messages %}<li>{{ m }}</li>{% endfor %}
-</ul>
-{% endif %}
+        </div>
+    </nav>
 
-{% block content %}{% endblock %}
+    {% if messages %}
+        <div class="site-messages">
+            {% for message in messages %}
+                <div class="site-message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main class="page-container">
+        <div class="board-container">
+
+            {% if request.user.is_authenticated %}
+                {% block professor_back_link %}
+                    {% if request.user.teacherprofile %}
+                        <a href="{% url 'professor_classes' %}"
+                           class="board-back-link">
+                            ← Back to My Classes
+                        </a>
+                    {% endif %}
+                {% endblock %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+
+        </div>
+    </main>
+
 </body>
 </html>

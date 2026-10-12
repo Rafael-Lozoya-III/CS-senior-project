@@ -1,3 +1,4 @@
+
 {% extends "boards/base.html" %}
 {% block content %}
 
@@ -7,12 +8,30 @@
 
 <a class="btn" href="{% url 'new_class_thread' class_group.slug %}">+ New Thread</a>
 
-{% if teams %}
-    <h2>Teams</h2>
-    {% for team in teams %}
+<h2>Teams</h2>
+{% for team in teams %}
+    <div class="card">
+        <a href="{{ team.get_absolute_url }}">{{ team.name }}</a>
+        <p class="meta">
+            {{ team.members.count }} members
+        </p>
+    </div>
+{% empty %}
+    <p>No teams have been created for this class yet.</p>
+{% endfor %}
+
+{% if request.user == class_group.teacher %}
+    <h2>Enrolled Students</h2>
+
+    {% for student in class_group.members.all %}
         <div class="card">
-            <a href="{{ team.get_absolute_url }}">{{ team.name }}</a>
+            <strong>
+                {{ student.get_full_name|default:student.username }}
+            </strong>
+            <p class="meta">@{{ student.username }}</p>
         </div>
+    {% empty %}
+        <p>No students are enrolled in this class yet.</p>
     {% endfor %}
 {% endif %}
 
@@ -32,4 +51,5 @@
 {% empty %}
     <p>No threads yet. Start the first discussion!</p>
 {% endfor %}
+
 {% endblock %}

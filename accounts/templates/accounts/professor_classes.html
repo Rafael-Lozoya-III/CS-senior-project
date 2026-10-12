@@ -2,36 +2,85 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="professor-dashboard">
 
     <div class="professor-header">
-    <div>
-        <h1>My Classes</h1>
-        <p>Manage your classes and student teams.</p>
-    </div>
+        <div>
+            <h1>My Classes</h1>
+            <p>Manage your classes, enrollment codes, and student teams.</p>
+        </div>
 
-    <a href="{% url 'create_class' %}" class="create-class-button">
-        + Create Class
-    </a>
-</div>
+        <a href="{% url 'create_class' %}" class="create-class-button">
+            + Create Class
+        </a>
+    </div>
 
     <div class="professor-classes">
+
         {% for class in classes %}
-            <a href="{{ class.get_absolute_url }}" class="professor-class-card">
+
+            <div class="professor-class-card">
+
                 <div>
-                    <h2>{{ class.name }}</h2>
-                    <p>{{ class.description|default:"View class details and discussions" }}</p>
-                    <span>{{ class.members.count }} students enrolled</span>
+                    <h2>
+                        <a href="{{ class.get_absolute_url }}">
+                            {{ class.name }}
+                        </a>
+                    </h2>
+
+                    <p>
+                        {{ class.description|default:"View class details and student teams" }}
+                    </p>
+
+                    <span>
+                        {{ class.members.count }} students enrolled
+                    </span>
+
+                    <div style="margin-top: 15px;">
+                        <p style="margin-bottom: 5px;">
+                            <strong>Class Enrollment Code</strong>
+                        </p>
+
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+
+                            <code style="font-size: 18px; font-weight: bold; letter-spacing: 2px; padding: 8px 12px; background: #f0f3f8; border-radius: 6px;">
+                                {{ class.enrollment_code }}
+                            </code>
+
+                            <button
+                                type="button"
+                                onclick="navigator.clipboard.writeText('{{ class.enrollment_code|escapejs }}')"
+                                style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; background: white; cursor: pointer;">
+                                Copy Code
+                            </button>
+
+                        </div>
+
+                        <p style="font-size: 12px; margin-top: 8px;">
+                            Share this code with students so they can join your class.
+                        </p>
+                    </div>
                 </div>
-                <span class="class-arrow">→</span>
-            </a>
+
+                <a href="{{ class.get_absolute_url }}" class="class-arrow"
+                   aria-label="View {{ class.name }}">
+                    →
+                </a>
+
+            </div>
+
         {% empty %}
+
             <div class="professor-empty">
                 <h2>No classes yet</h2>
-                <p>You don't have any classes assigned to your account.</p>
+                <p>Create your first class to get started.</p>
             </div>
+
         {% endfor %}
+
     </div>
 
 </div>
+
 {% endblock %}

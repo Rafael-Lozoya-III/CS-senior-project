@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import StudentProfile, Skill, Interest
+from .models import StudentProfile, Skill, Interest, Project
 
 
 
@@ -167,3 +167,44 @@ class ClassForm(forms.ModelForm):
             )
 
         return name
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            "title",
+            "description",
+            "class_group",
+            "max_members",
+        ]
+
+        labels = {
+            "title": "Project Title",
+            "description": "Description",
+            "class_group": "Class (Optional)",
+            "max_members": "Maximum Team Members",
+        }
+
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 4}),
+        }
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["class_group"].queryset = (
+            Class.objects.filter(members=user)
+            if user is not None and user.is_authenticated
+            else Class.objects.none()
+        )
+
+        self.fields["class_group"].empty_label = (
+            "Independent Project (No Class)"
+        )
+
+        self.fields["max_members"].min_value = 2
+        self.fields["max_members"].max_value = 10
+        self.fields["max_members"].widget.attrs.update({
+            "min": 2,
+            "max": 10,
+})

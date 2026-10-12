@@ -1,0 +1,105 @@
+
+{% extends "base.html" %}
+
+{% block title %}My Teams - Team Match{% endblock %}
+
+{% block content %}
+
+<div class="discover-header">
+    <h1>My Teams</h1>
+    <p>Manage the projects you've created or joined.</p>
+</div>
+
+<section>
+    <h2 class="section-title">Projects I Created</h2>
+
+    <div class="project-list">
+        {% for project in created_projects %}
+            <div class="project-card">
+
+                <div class="project-card-header">
+                    <div>
+                        <p class="project-course">
+                            {% if project.class_group %}
+                                {{ project.class_group.name }}
+                            {% else %}
+                                Independent Project
+                            {% endif %}
+                        </p>
+
+                        <h2>{{ project.title }}</h2>
+                    </div>
+
+                    <span class="tag">Creator</span>
+                </div>
+
+                <p class="project-description">
+                    {{ project.description|truncatewords:35 }}
+                </p>
+
+                <div class="project-footer">
+                    <a href="{% url 'project_detail' project.id %}"
+                       class="project-link">
+                        View Project →
+                    </a>
+                </div>
+
+            </div>
+        {% empty %}
+            <div class="no-results">
+                <p>You haven't created any projects yet.</p>
+                <a href="{% url 'create_project' %}">
+                    Create a Project
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section style="margin-top: 40px;">
+    <h2 class="section-title">Projects I Joined</h2>
+
+    <div class="project-list">
+        {% for project in joined_projects %}
+            <div class="project-card">
+
+                <div class="project-card-header">
+                    <div>
+                        <p class="project-course">
+                            {% if project.class_group %}
+                                {{ project.class_group.name }}
+                            {% else %}
+                                Independent Project
+                            {% endif %}
+                        </p>
+
+                        <h2>{{ project.title }}</h2>
+                    </div>
+
+                    <span class="tag">Member</span>
+                </div>
+
+                <p class="project-description">
+                    {{ project.description|truncatewords:35 }}
+                </p>
+
+                <div class="project-footer">
+                    <a href="{% url 'project_detail' project.id %}"
+                       class="project-link">
+                        View Project →
+                    </a>
+                </div>
+
+            </div>
+        {% empty %}
+            <div class="no-results">
+                <p>You haven't joined any projects yet.</p>
+                <a href="{% url 'discover' %}">
+                    Discover Projects
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

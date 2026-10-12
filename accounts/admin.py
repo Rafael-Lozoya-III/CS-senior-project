@@ -1,5 +1,14 @@
+
 from django.contrib import admin
-from .models import Skill, Interest, StudentProfile, StudentSkill, TeacherProfile
+from .models import (
+    Skill,
+    Interest,
+    StudentProfile,
+    StudentSkill,
+    TeacherProfile,
+    Project,
+    ProjectApplication,
+)
 
 
 class StudentSkillInline(admin.TabularInline):
@@ -16,6 +25,26 @@ class StudentProfileAdmin(admin.ModelAdmin):
         return obj.user.get_full_name() or obj.user.username
 
     get_name.short_description = "Student"
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "creator",
+        "class_group",
+        "max_members",
+        "created_at",
+    )
+    list_filter = ("class_group",)
+    search_fields = ("title", "description", "creator__username")
+
+
+@admin.register(ProjectApplication)
+class ProjectApplicationAdmin(admin.ModelAdmin):
+    list_display = ("project", "applicant", "status")
+    list_filter = ("status",)
+    search_fields = ("project__title", "applicant__username")
 
 
 admin.site.register(Skill)

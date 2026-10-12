@@ -1,27 +1,147 @@
+
 {% extends "boards/base.html" %}
+
+{% block title %}My Classes - Team Match{% endblock %}
+
 {% block content %}
-<h1>My Boards</h1>
 
-<h2>Classes</h2>
-{% for c in my_classes %}
-    <div class="card">
-        <h3><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></h3>
-        <p>{{ c.description }}</p>
-        <p class="meta">Teacher: {{ c.teacher.username }}</p>
-    </div>
-{% empty %}
-    <p>You aren't enrolled in any classes yet.</p>
-{% endfor %}
+<div class="discover-page">
 
-{% if not request.user.teacherprofile %}
-<h2>Teams</h2>
-{% for t in my_teams %}
-    <div class="card">
-        <h3><a href="{{ t.get_absolute_url }}">{{ t.name }}</a></h3>
-        <p class="meta">in {{ t.class_group.name }}</p>
+    <div class="discover-header">
+        <span class="eyebrow">YOUR CLASSROOM</span>
+        <h1>My Classes</h1>
+        <p>
+            Join your professor's class, connect with classmates,
+            and find your next team.
+        </p>
     </div>
-{% empty %}
-    <p>You aren't on any teams yet.</p>
-{% endfor %}
-{% endif %}
+
+    {% if not request.user.teacherprofile %}
+    <section style="margin-bottom: 32px;">
+
+        <h2 class="section-title">Join a Class</h2>
+
+        <div class="project-card">
+            <p>
+                Enter the enrollment code your professor gave you
+                to join their class.
+            </p>
+
+            <form method="post" action="{% url 'join_class' %}">
+                {% csrf_token %}
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+
+                    <input
+                        type="text"
+                        name="enrollment_code"
+                        placeholder="Enter 8-character code"
+                        maxlength="8"
+                        required
+                        autocomplete="off"
+                        style="flex: 1; min-width: 180px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; text-transform: uppercase;"
+                    >
+
+                    <button
+                        type="submit"
+                        class="create-class-button"
+                        style="cursor: pointer; border: none;"
+                    >
+                        Join Class
+                    </button>
+
+                </div>
+            </form>
+        </div>
+
+    </section>
+    {% endif %}
+
+    <section style="margin-bottom: 32px;">
+
+        <h2 class="section-title">Enrolled Classes</h2>
+
+        <div class="project-list">
+
+            {% for c in my_classes %}
+
+                <div class="project-card">
+
+                    <h3>
+                        <a href="{{ c.get_absolute_url }}">
+                            {{ c.name }}
+                        </a>
+                    </h3>
+
+                    <p>{{ c.description }}</p>
+
+                    <p class="meta">
+                        Professor: {{ c.teacher.username }}
+                    </p>
+
+                    <a href="{{ c.get_absolute_url }}">
+                        View Class →
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="project-card">
+                    <p>
+                        You haven't joined any classes yet.
+                        Enter your professor's code above to get started.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    {% if not request.user.teacherprofile %}
+    <section>
+
+        <h2 class="section-title">My Class Teams</h2>
+
+        <div class="project-list">
+
+            {% for t in my_teams %}
+
+                <div class="project-card">
+
+                    <h3>
+                        <a href="{{ t.get_absolute_url }}">
+                            {{ t.name }}
+                        </a>
+                    </h3>
+
+                    <p class="meta">
+                        Class: {{ t.class_group.name }}
+                    </p>
+
+                    <a href="{{ t.get_absolute_url }}">
+                        View Team →
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="project-card">
+                    <p>
+                        You're not part of a class team yet.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+    {% endif %}
+
+</div>
+
 {% endblock %}
