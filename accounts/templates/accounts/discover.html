@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -7,104 +8,202 @@
 
 <div class="discover-page">
 
-    <div class="discover-header">
-        <div>
-            <span class="discover-eyebrow">FIND YOUR NEXT TEAM</span>
-            <h1 class="page-title">Discover Projects</h1>
+    <!-- Welcome section -->
+    <section class="discover-hero">
+        <div class="discover-hero-content">
+            <span class="discover-eyebrow">
+                ✦ WHERE GREAT IDEAS FIND GREAT TEAMS
+            </span>
+
+            <h1 class="page-title">
+                Find your people.<br>
+                <span class="discover-gradient-text">
+                    Build something amazing.
+                </span>
+            </h1>
+
             <p class="page-subtitle">
-                Explore projects, discover new ideas, and find
-                teammates who share your interests.
+                Every great project starts with an idea and the
+                right people. Explore what students are building,
+                share your own ideas, and find a team that fits you.
             </p>
+
+            <div class="discover-hero-actions">
+                <a href="#explore-projects"
+                   class="discover-explore-button">
+                    Explore Projects ↓
+                </a>
+
+                <a href="{% url 'create_project' %}"
+                   class="create-project-button">
+                    + Create Project
+                </a>
+            </div>
+        </div>
+
+        <div class="discover-hero-decoration" aria-hidden="true">
+            <div class="discover-orbit orbit-one"></div>
+            <div class="discover-orbit orbit-two"></div>
+            <div class="discover-hero-symbol">✦</div>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="discover-overview">
+        <div class="discover-overview-item">
+            <span class="discover-overview-icon">✦</span>
+            <div>
+                <strong>{{ projects|length }}</strong>
+                <span>Projects to explore</span>
+            </div>
+        </div>
+
+        <div class="discover-overview-item">
+            <span class="discover-overview-icon">◈</span>
+            <div>
+                <strong>Discover</strong>
+                <span>Find ideas that inspire you</span>
+            </div>
+        </div>
+
+        <div class="discover-overview-item">
+            <span class="discover-overview-icon">↗</span>
+            <div>
+                <strong>Collaborate</strong>
+                <span>Connect with other students</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project discovery -->
+    <section id="explore-projects" class="discover-projects-section">
+
+        <div class="discover-section-header">
+            <div>
+                <span class="discover-eyebrow">
+                    EXPLORE THE POSSIBILITIES
+                </span>
+
+                <h2 class="section-title">
+                    Discover Projects
+                </h2>
+
+                <p>
+                    Find something you'd love to work on.
+                </p>
             </div>
 
-            <a href="{% url 'create_project' %}" class="create-project-button">
-                + Create Project
-            </a>
+            <span class="project-total">
+                {{ projects|length }} projects
+            </span>
+        </div>
 
-            </div>
+        <div class="discover-tools">
+            <input
+                id="project-search"
+                class="search-input"
+                type="search"
+                placeholder="Search by project, course, or skill"
+                autocomplete="off"
+                aria-label="Search projects"
+            >
 
-<div class="discover-tools">
+            <button class="filter-button" type="button">
+                Filter
+            </button>
+        </div>
 
-    <input
-        id="project-search"
-        class="search-input"
-        type="search"
-        placeholder="Search by project, course, or skill"
-        autocomplete="off"
-        aria-label="Search projects"
-    >
+        <div class="project-list">
 
-    <button class="filter-button" type="button">
-        Filter
-    </button>
+            {% for project in projects %}
 
-</div>
+                <article class="project-card searchable-project">
 
-<div class="discover-section-header">
-    <div>
-        <h2 class="section-title">Explore Projects</h2>
-        <P>Find something you'd love to work on.</P>
-    </div>
-        <span class="project-total">
-            {{ projects|length }} projects
-        </span>
-    </div>
+                    <div class="project-card-header">
+                        <div>
+                            <span class="project-category">
+                                {% if project.class_group %}
+                                    {{ project.class_group.name }}
+                                {% else %}
+                                    Independent Project
+                                {% endif %}
+                            </span>
 
+                            <h2>{{ project.title }}</h2>
+                        </div>
 
-    <div class="project-list">
-        {% for project in projects %}
-            <article class="project-card searchable-project">
-
-                <div class="project-card-header">
-                    <div>
-                        <span class="project-category">
-                            {% if project.class_group %}
-                                {{ project.class_group.name }}
-                            {% else %}
-                                Independent Project
-                            {% endif %}
+                        <span class="member-count">
+                            Up to {{ project.max_members }} members
                         </span>
-                        <h2>{{ project.title }}</h2>
                     </div>
 
-                    <span class="member-count">
-                        Max {{ project.max_members }} members
-                    </span>
-                </div>
+                    <p class="project-description">
+                        {{ project.description }}
+                    </p>
 
-                <p class="project-description">
-                    {{ project.description }}
-                </p>
+                    <div class="tags">
+                        <span class="tag">
+                            ✦ Created by {{ project.creator.username }}
+                        </span>
+                    </div>
 
-                <div class="tags">
-                    <span class="tag">
-                        Created by {{ project.creator.username }}
-                    </span>
-                </div>
+                    <div class="project-footer">
+                        <span class="project-availability">
+                            <span aria-hidden="true">◉</span>
+                            Team capacity: {{ project.max_members }}
+                        </span>
 
-                <div class="project-footer">
-                    <span class="project-availability">
-                        Team size: up to {{ project.max_members }}
-                    </span>
+                        <a href="{% url 'project_detail' project.id %}"
+                           class="project-link">
+                            View Project &rarr;
+                        </a>
+                    </div>
 
-                    <a href="{% url 'project_detail' project.id %}"
-                       class="project-link">
-                        View Project &rarr;
+                </article>
+
+            {% empty %}
+
+                <div class="discover-empty">
+                    <h3>Your next big idea starts here.</h3>
+
+                    <p>
+                        No projects have been shared yet.
+                        Be the first to create one and invite
+                        other students to collaborate.
+                    </p>
+
+                    <a href="{% url 'create_project' %}"
+                       class="create-project-button">
+                        + Create the First Project
                     </a>
                 </div>
 
-            </article>
-        {% empty %}
-            <div class="discover-empty">
-                <h3>No projects available yet</h3>
-                <p>Check back later for new opportunities.</p>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
 
-    <p id="no-project-results" class="no-results" hidden>
-        No projects match your search.
-    </p>
+        </div>
+
+        <p id="no-project-results" class="no-results" hidden>
+            No projects match your search.
+        </p>
+
+    </section>
+
+    <!-- Closing section -->
+    <section class="discover-bottom-banner">
+        <div>
+            <h2>Have an idea worth building?</h2>
+
+            <p>
+                Start your own project and bring the right
+                teammates together.
+            </p>
+        </div>
+
+        <a href="{% url 'create_project' %}"
+           class="create-project-button">
+            Start a Project &rarr;
+        </a>
+    </section>
 
 </div>
 
