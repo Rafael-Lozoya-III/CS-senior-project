@@ -1,203 +1,143 @@
+
 /* Original login, signup, logout styles — extracted in original cascade order. */
 
 /* Login page */
 
 .login-container {
-
     display: flex;
-
     justify-content: center;
-
     padding: 60px 20px;
-
 }
 
 .login-card {
-
     background: white;
-
     border: 1px solid #ddd;
-
     border-radius: 12px;
-
     padding: 36px;
-
     width: 100%;
-
     max-width: 440px;
-
 }
 
 .login-card h1 {
-
     margin-bottom: 8px;
-
 }
 
 .login-card > p {
-
     color: #667085;
-
     margin-bottom: 24px;
-
 }
 
 .login-card form {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 18px;
-
 }
 
 .login-card input[type="text"],
-
 .login-card input[type="password"] {
-
     width: 100%;
-
     padding: 12px;
-
     border: 1px solid #ccc;
-
     border-radius: 8px;
-
     margin-top: 6px;
-
     box-sizing: border-box;
-
 }
 
 .login-error {
-
     color: #b42318 !important;
-
     background: #fef3f2;
-
     padding: 12px;
-
     border-radius: 8px;
-
 }
 
 .signup-text {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    margin-top: 8px;
+    padding-top: 22px;
+    border-top: 1px solid #e9edf5;
     text-align: center;
+    font-size: 13px;
+    color: #778399;
+}
 
-    margin-top: 24px;
+.signup-text a {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 9px;
+    background: #edf2ff;
+    color: #385db3;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
 
-    font-size: 14px;
+.signup-text a:hover {
+    background: #dfe8ff;
+    color: #254994;
+}
 
+.signup-text a:focus-visible {
+    outline: 2px solid #385db3;
+    outline-offset: 3px;
 }
 
 .logged-out-nav {
-
     justify-content: center;
-
 }
 
 .signup-button {
-
-    width: 100%;
-
-    padding: 12px;
-
-    background: white;
-
-    color: #222;
-
-    border: 1px solid #222;
-
-    border-radius: 6px;
-
-    font-weight: 600;
-
-    cursor: not-allowed;
-
-    opacity: 0.65;
-
-}
-
-.logout-form {
-
-    margin: 0;
-
-}
-
-.logout-button {
-
-    background: none;
-
-    border: none;
-
-    padding: 0;
-
-    font: inherit;
-
-    color: #222;
-
-    cursor: pointer;
-
-}
-
-.logout-button:hover {
-
-    text-decoration: underline;
-
-}
-
-.signup-button {
-
     display: block;
-
     width: 100%;
-
     padding: 12px;
-
     background: white;
-
     color: #222;
-
     border: 1px solid #222;
-
     border-radius: 6px;
-
     font-weight: 600;
-
     text-align: center;
-
     text-decoration: none;
-
     box-sizing: border-box;
-
     cursor: pointer;
-
     opacity: 1;
-
 }
 
 .signup-button:hover {
-
     background: #f3f4f6;
+}
 
+.logout-form {
+    margin: 0;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: #222;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
 }
 
 .login-card select,
-
 .login-card input[type="email"] {
-
     width: 100%;
-
     padding: 12px;
-
     border: 1px solid #ccc;
-
     border-radius: 8px;
-
     margin-top: 6px;
-
     box-sizing: border-box;
+}
 
+@media (prefers-reduced-motion: reduce) {
+    .signup-text a {
+        transition: none;
+    }
 }

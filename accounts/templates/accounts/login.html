@@ -6,27 +6,35 @@
 {% block main_class %}auth-page{% endblock %}
 
 {% block content %}
+
 <div class="login-container">
     <div class="login-card">
 
+        <!-- Welcome heading -->
         <div class="login-heading">
-    <div class="login-icon">✦</div>
 
-    <p class="login-brand">TEAM MATCH</p>
-    <h1>Welcome back!</h1>
+            <div class="login-icon">✦</div>
+
+            <p class="login-brand">TEAM MATCH</p>
+
+            <h1>Welcome to Team Match.</h1>
 
             <p>
-                Sign in to find teammates, explore projects,
-                and collaborate with your class.
+                Discover projects, meet classmates, and
+                build something great together.
             </p>
+
         </div>
 
+        <!-- Login errors -->
         {% if form.errors %}
-            <p class="login-error">
-                Invalid username or password. Please try again.
+            <p class="login-error" role="alert">
+                Invalid username or password.
+                Please try again.
             </p>
         {% endif %}
 
+        <!-- Login form -->
         <form method="post">
             {% csrf_token %}
 
@@ -46,12 +54,18 @@
                 Sign In
             </button>
 
-            <p class="signup-text">
-                New to Team Match?
-                <a href="{% url 'signup' %}">Create an account</a>
-            </p>
+            <!-- New student registration -->
+            <div class="signup-text">
+                <span>New to Team Match?</span>
+
+                <a href="{% url 'signup' %}">
+                    Create your account →
+                </a>
+            </div>
+
         </form>
 
     </div>
 </div>
+
 {% endblock %}
