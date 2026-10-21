@@ -1,19 +1,14 @@
 from dataclasses import dataclass, field
-from accounts.models import Skill, StudentSkill
+from accounts.models import ProjectSkillRequirement, StudentProfile, StudentSkill
 
 SUPPORTING_BASE = 10
 SUPPORTING_LEVEL_BONUS = 2
 CORE_LEVEL_BONUS = 1
 
-@dataclass
-class Requirement:
-    skill: Skill
-    min_level: int = 1
-    is_core: bool = False
 
 @dataclass
 class MatchResult:
-    student: object
+    student: StudentProfile
     eligible: bool
     score: int
     supporting_total: int = 0
@@ -80,8 +75,11 @@ def _score(student, student_levels, requirements, open_supporting):
 def rank_candidates(candidates, requirements, team_members=()):
     team_members = list(team_members)
     member_ids = {m.pk for m in team_members}
-    candidates = [c for c in candidates if c.pk not in member_ids]
+    candidates = list(candidates)
+    requirements = list(requirements)
     
+    candidates = [candidate for candidate in candidates if candidate.pk not in member_ids]
+
     levels = _levels_by_student(candidates + team_members)
     member_levels = [levels.get(m.pk, {}) for m in team_members]
     open_supporting = _open_supporting(requirements, member_levels)
@@ -92,6 +90,13 @@ def rank_candidates(candidates, requirements, team_members=()):
     ]
     results.sort(key=lambda r: (not r.eligible, -r.score, str(r.student)))
     return results
+
+def rank_project_candidates(project, candidates, team_members=()):
+    requirements = ProjectSkillRequirement.objects.filter(
+        project=project
+    ).select_related("skill")
+
+    return rank_candidates(candidates, requirements, team_members)
 
 def rank_teams_for_student(student, teams):
     scored = []

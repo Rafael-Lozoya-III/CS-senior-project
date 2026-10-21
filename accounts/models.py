@@ -74,15 +74,41 @@ class Project(models.Model):
         related_name="projects"
     )
 
-    def __str__(self):
-        return f"{self.applicant.username} - {self.project.title} ({self.status})"
-
     max_members = models.PositiveIntegerField(default=4)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
     
+class ProjectSkillRequirement(models.Model):
+    LEVELS = StudentSkill.LEVELS
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name="skill_requirements",
+    )
+    skill = models.ForeignKey(
+        Skill,
+        on_delete=models.CASCADE,
+        related_name="project_requirements",
+    )
+    min_level = models.IntegerField(choices=LEVELS, default=1)
+    is_core = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["project", "skill"],
+                name="unique_project_skill_requirement",
+            )
+        ]
+    
+    def __str__(self):
+        return f"{self.project.title} - {self.skill.name}"
+
+
+
 class ProjectApplication(models.Model):
     STATUS_CHOICES = [
         ("pending", "Pending"),
