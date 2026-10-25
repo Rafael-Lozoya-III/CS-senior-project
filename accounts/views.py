@@ -176,7 +176,7 @@ def professor_classes(request):
 
     classes = Class.objects.filter(
         teacher=request.user
-    ).prefetch_related("members")
+    )
 
     return render(
         request,
