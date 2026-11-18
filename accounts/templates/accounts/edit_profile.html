@@ -44,6 +44,15 @@
     <form method="post" class="profile-editor-form">
         {% csrf_token %}
 
+        <div class="profile-editor-panel">
+            <label for="profile-resume">Suggest from a resume (.docx)</label>
+            <input id="profile-resume" type="file" accept=".docx">
+            <button id="suggest-profile-button" type="button">
+                Suggest profile details
+            </button>
+            <p id="suggest-profile-status" role="status"></p>
+        </div>
+
         {% if form.non_field_errors %}
             <div class="profile-editor-error-summary" role="alert">
                 {{ form.non_field_errors }}
@@ -358,6 +367,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
         row.querySelector("select")
             .addEventListener("change", refreshSkills);
+    });
+
+    const suggestButton = document.getElementById("suggest-profile-button");
+    const resumeInput = document.getElementById("profile-resume");
+    const suggestStatus = document.getElementById("suggest-profile-status");
+
+    suggestButton.addEventListener("click", async function () {
+        if (!resumeInput.files.length) {
+            suggestStatus.textContent = "Choose a resume first.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("resume", resumeInput.files[0]);
+        formData.append(
+            "csrfmiddlewaretoken",
+            document.querySelector("[name=csrfmiddlewaretoken]").value
+        );
+
+        suggestStatus.textContent = "Reading your resume…";
+        suggestButton.disabled = true;
+
+        try {
+            const response = await fetch("{% url 'suggest_profile' %}", {
+                method: "POST",
+                body: formData
+            });
+            const suggestions = await response.json();
+
+            if (!response.ok) {
+                throw new Error(suggestions.error || "Suggestions failed.");
+            }
+
+            rows.forEach(function (row) {
+                row.querySelector("select").value = "";
+            });
+
+            suggestions.skills.forEach(function (skill) {
+                const field = document.querySelector(
+                    `[name="skill_${skill.id}"]`
+                );
+                if (field) {
+                    field.value = String(skill.level);
+                }
+            });
+
+            document.querySelectorAll('input[name="interests"]').forEach(
+                function (checkbox) {
+                    checkbox.checked = suggestions.interests.includes(
+                        checkbox.value
+                    );
+                }
+            );
+
+            refreshSkills();
+            suggestStatus.textContent =
+                "Suggestions added. Review them, then click Save Changes.";
+        } catch (error) {
+            suggestStatus.textContent = error.message;
+        } finally {
+            suggestButton.disabled = false;
+        }
     });
 
     refreshSkills();

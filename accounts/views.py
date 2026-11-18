@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db import IntegrityError, transaction
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
@@ -61,6 +62,63 @@ def edit_profile(request):
         "accounts/edit_profile.html",
         {"form": form},
     )
+
+
+@login_required
+@require_POST
+def suggest_profile(request):
+    if not StudentProfile.objects.filter(user=request.user).exists():
+        raise PermissionDenied
+
+    resume = request.FILES.get("resume")
+    if not resume:
+        return JsonResponse({"error": "Choose a resume first."}, status=400)
+
+    import json
+
+    from agents import Runner as AgentRunner
+
+    from .ai_profile import build_profile_assistant, resume_context
+    from .models import Interest, Skill, StudentSkill
+
+    try:
+        with resume_context(resume) as resume_text:
+            assistant = build_profile_assistant(resume_text)
+
+        result = AgentRunner.run_sync(
+            assistant,
+            "Read my resume and return profile suggestions in the required JSON format.",
+        )
+        suggestions = json.loads(result.final_output)
+        if not isinstance(suggestions, dict):
+            raise ValueError("The assistant returned an invalid response.")
+
+        valid_levels = {level for level, _label in StudentSkill.LEVELS}
+        valid_skill_ids = {str(skill.id) for skill in Skill.objects.all()}
+        valid_interest_ids = {str(interest.id) for interest in Interest.objects.all()}
+
+        skills = []
+        for item in suggestions.get("skills", []):
+            if not isinstance(item, dict):
+                continue
+            skill_id = str(item.get("id", ""))
+            level = item.get("level")
+            if skill_id in valid_skill_ids and type(level) is int and level in valid_levels:
+                skills.append({"id": skill_id, "level": level})
+
+        interests = [
+            str(interest_id)
+            for interest_id in suggestions.get("interests", [])
+            if str(interest_id) in valid_interest_ids
+        ]
+        return JsonResponse({"skills": skills, "interests": interests})
+    except (ValueError, json.JSONDecodeError) as error:
+        return JsonResponse({"error": str(error)}, status=400)
+    except Exception:
+        return JsonResponse(
+            {"error": "Unable to generate suggestions right now."},
+            status=502,
+        )
 
 
 @login_required

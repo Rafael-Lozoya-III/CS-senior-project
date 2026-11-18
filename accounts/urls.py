@@ -46,6 +46,12 @@ urlpatterns = [
     ),
 
     path(
+        "profile/suggest/",
+        views.suggest_profile,
+        name="suggest_profile",
+    ),
+
+    path(
         "professor/classes/",
         views.professor_classes,
         name="professor_classes",

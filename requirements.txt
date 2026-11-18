@@ -1,4 +1,8 @@
+--extra-index-url https://pypi.fury.io/ericmichael/
+
 Django>=5.0,<6.0
 python-dotenv>=1.0,<2.0 
 factory-boy>=3.3,<4.0
 django-mongodb-backend==5.2.*
+omniagents[all]==0.8.0
+markitdown[docx]>=0.1.1
