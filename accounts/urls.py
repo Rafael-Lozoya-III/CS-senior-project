@@ -76,19 +76,19 @@ urlpatterns = [
     ),
 
     path(
-        "projects/applications/<int:application_id>/review/",
+        "projects/applications/<str:application_id>/review/",
         views.review_project_application,
         name="review_project_application",
     ),
 
     path(
-        "projects/<int:project_id>/apply/",
+        "projects/<str:project_id>/apply/",
         views.apply_to_project,
         name="apply_to_project",
     ),
 
     path(
-        "projects/<int:project_id>/",
+        "projects/<str:project_id>/",
         views.project_detail,
         name="project_detail",
     ),
